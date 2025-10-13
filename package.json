@@ -9,7 +9,12 @@
 		"lint": "eslint",
 		"lint:fix": "eslint --fix",
 		"format": "prettier --check .",
-		"format:fix": "prettier --write ."
+		"format:fix": "prettier --write .",
+		"db:migrate": "dotenv -e .env.local -- prisma migrate dev",
+		"db:reset": "dotenv -e .env.local -- prisma migrate reset",
+		"db:generate": "dotenv -e .env.local -- prisma generate",
+		"db:studio": "dotenv -e .env.local -- prisma studio",
+		"postinstall": "pnpm run db:generate"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.17.1",
@@ -34,6 +39,7 @@
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"dotenv-cli": "^10.0.0",
 		"eslint": "^9",
 		"eslint-config-next": "15.5.4",
 		"eslint-config-prettier": "^10.1.8",

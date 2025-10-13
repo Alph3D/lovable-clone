@@ -63,7 +63,16 @@ const eslintConfig = [
 	}),
 	...compat.plugins('tailwindcss'),
 	{
-		ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'migrations/**'],
+		ignores: [
+			'node_modules/**',
+			'.next/**',
+			'out/**',
+			'build/**',
+			'next-env.d.ts',
+			'migrations/**',
+			'prisma/migrations/**',
+			'src/generated/prisma/**',
+		],
 	},
 ];
 
