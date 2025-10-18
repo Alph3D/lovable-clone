@@ -9,6 +9,9 @@ declare global {
 
 			// neon db uri
 			DATABASE_URL: string;
+
+			// openai api key
+			OPENAI_API_KEY: string;
 		}
 	}
 }

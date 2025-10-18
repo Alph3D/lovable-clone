@@ -3,9 +3,9 @@ import { z } from 'zod';
 
 export const env = createEnv({
 	client: {
-		NEXT_PUBLIC_APP_BASE_URL: z.url(),
+		NEXT_PUBLIC_APP_BASE_URL: z.url().trim(),
 		NEXT_PUBLIC_VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(),
-		NEXT_PUBLIC_VERCEL_URL: z.string().endsWith('.vercel.app').optional(),
+		NEXT_PUBLIC_VERCEL_URL: z.string().trim().endsWith('.vercel.app').optional(),
 	},
 	emptyStringAsUndefined: true,
 	isServer: typeof window === 'undefined',

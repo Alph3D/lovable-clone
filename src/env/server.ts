@@ -17,7 +17,8 @@ export const env = createEnv({
 		throw new Error('❌ Invalid environment variables');
 	},
 	server: {
-		DATABASE_URL: z.url(),
+		DATABASE_URL: z.url().trim(),
 		NODE_ENV: z.enum(['development', 'production', 'test']).default('development').optional(),
+		OPENAI_API_KEY: z.string().trim().min(1).startsWith('sk-proj-'),
 	},
 });
