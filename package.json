@@ -3,9 +3,10 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "mprocs \"pnpm run dev:next\" \"pnpm run dev:webhook\" \"pnpm run db:studio\"",
+		"dev": "mprocs \"pnpm run dev:next\" \"pnpm run dev:webhook\" \"pnpm run dev:inngest\" \"pnpm run db:studio\"",
 		"dev:next": "next dev --turbopack",
 		"dev:webhook": "ngrok http --url=wired-legible-monster.ngrok-free.app 3000",
+		"dev:inngest": "inngest-cli dev",
 		"build": "next build --turbopack",
 		"start": "next start",
 		"lint": "eslint",
