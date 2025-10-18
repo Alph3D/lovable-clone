@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils';
 
 import './globals.css';
 
+import { Providers } from '@/components/providers';
+
 const inter = Inter({
 	subsets: ['latin'],
 });
@@ -21,7 +23,9 @@ const RootLayout = ({
 }>) => {
 	return (
 		<html lang='en'>
-			<body className={cn(inter.className, 'antialiased')}>{children}</body>
+			<body className={cn(inter.className, 'antialiased')}>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	);
 };

@@ -1,19 +1,22 @@
-import { Button } from '@/components/ui/button';
-import { db } from '@/lib/db';
+import { Suspense } from 'react';
+
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+
+import { getQueryClient, trpc } from '@/trpc/server';
+
+import { Client } from './client';
 
 const HomePage = async () => {
-	const users = await db.user.findMany();
+	const queryClient = getQueryClient();
+
+	void queryClient.prefetchQuery(trpc.hello.queryOptions({ text: 'test' }));
 
 	return (
-		<div>
-			<h1 className='text-4xl font-bold'>Home Page</h1>
-
-			<Button variant='destructive' size='lg'>
-				Click me
-			</Button>
-
-			<pre>{JSON.stringify(users, null, 2)}</pre>
-		</div>
+		<HydrationBoundary state={dehydrate(queryClient)}>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Client />
+			</Suspense>
+		</HydrationBoundary>
 	);
 };
 
