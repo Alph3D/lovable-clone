@@ -12,6 +12,9 @@ declare global {
 
 			// openai api key
 			OPENAI_API_KEY: string;
+
+			// e2b api key
+			E2B_API_KEY: string;
 		}
 	}
 }

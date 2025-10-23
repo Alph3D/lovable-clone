@@ -18,6 +18,7 @@ export const env = createEnv({
 	},
 	server: {
 		DATABASE_URL: z.url().trim(),
+		E2B_API_KEY: z.string().trim().min(1).startsWith('e2b_'),
 		NODE_ENV: z.enum(['development', 'production', 'test']).default('development').optional(),
 		OPENAI_API_KEY: z.string().trim().min(1).startsWith('sk-proj-'),
 	},
