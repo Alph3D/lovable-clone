@@ -164,6 +164,7 @@ export const codeAgentFunction = inngest.createFunction(
 				return await db.message.create({
 					data: {
 						content: 'Something went wrong. Please try again.',
+						projectId: event.data.projectId,
 						role: MessageRole.ASSISTANT,
 						type: MessageType.ERROR,
 					},
@@ -180,6 +181,7 @@ export const codeAgentFunction = inngest.createFunction(
 							title: 'Fragment',
 						},
 					},
+					projectId: event.data.projectId,
 					role: MessageRole.ASSISTANT,
 					type: MessageType.RESULT,
 				},

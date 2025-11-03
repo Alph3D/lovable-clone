@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
@@ -12,17 +13,14 @@ import { useTRPC } from '@/trpc/client';
 const HomePage = () => {
 	const [value, setValue] = useState('');
 	const trpc = useTRPC();
+	const router = useRouter();
 
-	const { data: messages } = useQuery(trpc.messages.getMany.queryOptions());
-
-	const createMessage = useMutation(
-		trpc.messages.create.mutationOptions({
+	const createProject = useMutation(
+		trpc.projects.create.mutationOptions({
 			onError: (error) => {
 				toast.error(error.message);
 			},
-			onSuccess: () => {
-				toast.success('Message created successfully');
-			},
+			onSuccess: ({ id }) => router.push(`/projects/${id}`),
 		})
 	);
 
@@ -31,14 +29,12 @@ const HomePage = () => {
 			<div className='flex flex-col gap-2'>
 				<Input placeholder='Enter value' value={value} onChange={(e) => setValue(e.target.value)} />
 
-				<Button disabled={createMessage.isPending} onClick={() => createMessage.mutate({ value })}>
-					Invoke Background Job
+				<Button disabled={createProject.isPending} onClick={() => createProject.mutate({ value })}>
+					Submit
 				</Button>
-				{createMessage.isPending && <div>Invoking...</div>}
-				{createMessage.isSuccess && <div>Invoked successfully</div>}
-				{createMessage.isError && <div>Error: {createMessage.error.message}</div>}
-
-				<pre>{JSON.stringify(messages, null, 2)}</pre>
+				{createProject.isPending && <div>Invoking...</div>}
+				{createProject.isSuccess && <div>Invoked successfully</div>}
+				{createProject.isError && <div>Error: {createProject.error.message}</div>}
 			</div>
 		</div>
 	);

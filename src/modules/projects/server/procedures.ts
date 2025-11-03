@@ -1,3 +1,4 @@
+import { generateSlug } from 'random-word-slugs';
 import { z } from 'zod';
 
 import { MAX_MESSAGE_LENGTH, MIN_MESSAGE_LENGTH } from '@/modules/messages/config';
@@ -7,11 +8,10 @@ import { inngest } from '@/inngest/client';
 import { db } from '@/lib/db';
 import { baseProcedure, createTRPCRouter } from '@/trpc/init';
 
-export const messagesRouter = createTRPCRouter({
+export const projectsRouter = createTRPCRouter({
 	create: baseProcedure
 		.input(
 			z.object({
-				projectId: z.uuid().trim().min(1, 'Project ID is required!'),
 				value: z
 					.string()
 					.trim()
@@ -20,34 +20,40 @@ export const messagesRouter = createTRPCRouter({
 			})
 		)
 		.mutation(async ({ input }) => {
-			const { projectId, value } = input;
+			const { value } = input;
 
-			const message = await db.message.create({
+			const project = await db.project.create({
 				data: {
-					content: value,
-					projectId,
-					role: MessageRole.USER,
-					type: MessageType.RESULT,
+					messages: {
+						create: {
+							content: value,
+							role: MessageRole.USER,
+							type: MessageType.RESULT,
+						},
+					},
+					name: generateSlug(2, {
+						format: 'kebab',
+					}),
 				},
 			});
 
 			await inngest.send({
 				data: {
-					projectId,
-					value,
+					projectId: project.id,
+					value: value,
 				},
 				name: 'code-agent/run',
 			});
 
-			return message;
+			return project;
 		}),
 	getMany: baseProcedure.query(async () => {
-		const messages = await db.message.findMany({
+		const projects = await db.project.findMany({
 			orderBy: {
 				updatedAt: 'desc',
 			},
 		});
 
-		return messages;
+		return projects;
 	}),
 });
