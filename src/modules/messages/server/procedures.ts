@@ -15,8 +15,8 @@ export const messagesRouter = createTRPCRouter({
 				value: z
 					.string()
 					.trim()
-					.min(MIN_MESSAGE_LENGTH, 'Value is required')
-					.max(MAX_MESSAGE_LENGTH, 'Value is too long'),
+					.min(MIN_MESSAGE_LENGTH, 'Value is required!')
+					.max(MAX_MESSAGE_LENGTH, 'Value is too long!'),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -41,13 +41,27 @@ export const messagesRouter = createTRPCRouter({
 
 			return message;
 		}),
-	getMany: baseProcedure.query(async () => {
-		const messages = await db.message.findMany({
-			orderBy: {
-				updatedAt: 'desc',
-			},
-		});
+	getMany: baseProcedure
+		.input(
+			z.object({
+				projectId: z.uuid().trim().min(1, 'Project ID is required!'),
+			})
+		)
+		.query(async ({ input }) => {
+			const { projectId } = input;
 
-		return messages;
-	}),
+			const messages = await db.message.findMany({
+				include: {
+					fragment: true,
+				},
+				orderBy: {
+					updatedAt: 'asc',
+				},
+				where: {
+					projectId,
+				},
+			});
+
+			return messages;
+		}),
 });

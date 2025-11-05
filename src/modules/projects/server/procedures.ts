@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { generateSlug } from 'random-word-slugs';
 import { z } from 'zod';
 
@@ -15,8 +16,8 @@ export const projectsRouter = createTRPCRouter({
 				value: z
 					.string()
 					.trim()
-					.min(MIN_MESSAGE_LENGTH, 'Value is required')
-					.max(MAX_MESSAGE_LENGTH, 'Value is too long'),
+					.min(MIN_MESSAGE_LENGTH, 'Value is required!')
+					.max(MAX_MESSAGE_LENGTH, 'Value is too long!'),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -56,4 +57,23 @@ export const projectsRouter = createTRPCRouter({
 
 		return projects;
 	}),
+	getOne: baseProcedure
+		.input(
+			z.object({
+				id: z.uuid().trim().min(1, 'ID is required!'),
+			})
+		)
+		.query(async ({ input }) => {
+			const { id } = input;
+
+			const project = await db.project.findUnique({
+				where: {
+					id,
+				},
+			});
+
+			if (!project) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found!' });
+
+			return project;
+		}),
 });

@@ -33,8 +33,6 @@ const HomePage = () => {
 					Submit
 				</Button>
 				{createProject.isPending && <div>Invoking...</div>}
-				{createProject.isSuccess && <div>Invoked successfully</div>}
-				{createProject.isError && <div>Error: {createProject.error.message}</div>}
 			</div>
 		</div>
 	);
