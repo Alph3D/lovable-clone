@@ -32,13 +32,14 @@ export const MessagesContainer = ({ activeFragment, projectId, setActiveFragment
 	const lastMessage = messages[messages.length - 1];
 	const isLastMessageUser = lastMessage?.role === MessageRole.USER;
 
-	useEffect(() => {
+	// TODO: Fix this
+	/* useEffect(() => {
 		const lastAssistantMessageWithFragment = messages.findLast(
 			(message) => message.role === MessageRole.ASSISTANT && !!message.fragment
 		);
 
 		if (lastAssistantMessageWithFragment) setActiveFragment(lastAssistantMessageWithFragment.fragment);
-	}, [messages, setActiveFragment]);
+	}, [messages, setActiveFragment]); */
 
 	useEffect(() => {
 		bottomRef.current?.scrollIntoView();
