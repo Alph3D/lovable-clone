@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { MAX_MESSAGE_LENGTH, MIN_MESSAGE_LENGTH } from '@/modules/messages/config';
+import { CreateMessageSchema } from '@/modules/messages/schemas/create-message-schema';
 
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
@@ -10,13 +10,8 @@ import { baseProcedure, createTRPCRouter } from '@/trpc/init';
 export const messagesRouter = createTRPCRouter({
 	create: baseProcedure
 		.input(
-			z.object({
+			CreateMessageSchema.extend({
 				projectId: z.uuid().trim().min(1, 'Project ID is required!'),
-				value: z
-					.string()
-					.trim()
-					.min(MIN_MESSAGE_LENGTH, 'Value is required!')
-					.max(MAX_MESSAGE_LENGTH, 'Value is too long!'),
 			})
 		)
 		.mutation(async ({ input }) => {
