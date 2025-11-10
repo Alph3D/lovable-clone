@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from 'react';
 
+import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
 import { MessagesContainer } from '@/modules/projects/ui/components/messages-container';
 import { ProjectHeader } from '@/modules/projects/ui/components/project-header';
 
@@ -35,7 +36,7 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 				<ResizableHandle withHandle />
 
 				<ResizablePanel defaultSize={65} minSize={50}>
-					TODO: Preview
+					{!!activeFragment && <FragmentWeb data={activeFragment} />}
 				</ResizablePanel>
 			</ResizablePanelGroup>
 		</div>
