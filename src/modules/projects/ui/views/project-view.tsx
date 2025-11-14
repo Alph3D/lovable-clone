@@ -9,7 +9,7 @@ import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
 import { MessagesContainer } from '@/modules/projects/ui/components/messages-container';
 import { ProjectHeader } from '@/modules/projects/ui/components/project-header';
 
-import { CodeView } from '@/components/code-view';
+import { FileExplorer } from '@/components/file-explorer';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -76,8 +76,8 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 								<FragmentWeb data={activeFragment} />
 							</TabsContent>
 
-							<TabsContent value='code'>
-								<CodeView lang='ts' code={`const a = 'Hello, world!';`} />
+							<TabsContent value='code' className='min-h-0'>
+								{!!activeFragment?.files && <FileExplorer files={activeFragment.files as { [path: string]: string }} />}
 							</TabsContent>
 						</Tabs>
 					)}

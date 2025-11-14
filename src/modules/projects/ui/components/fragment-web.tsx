@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { ClipboardCheckIcon, ExternalLinkIcon, RefreshCcwIcon } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 import { Hint } from '@/components/hint';
 import { Button } from '@/components/ui/button';
@@ -22,10 +23,14 @@ export const FragmentWeb = ({ data }: FragmentWebProps) => {
 	};
 
 	const handleCopy = () => {
-		navigator.clipboard.writeText(data.sandboxUrl);
-		setCopied(true);
+		try {
+			navigator.clipboard.writeText(data.sandboxUrl);
+			setCopied(true);
 
-		setTimeout(() => setCopied(false), 2000); // 2 seconds
+			setTimeout(() => setCopied(false), 2000); // 2 seconds
+		} catch (error) {
+			toast.error(error instanceof Error ? error.message : 'Failed to copy to clipboard!');
+		}
 	};
 
 	return (
