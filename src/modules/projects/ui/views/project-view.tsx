@@ -9,6 +9,7 @@ import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
 import { MessagesContainer } from '@/modules/projects/ui/components/messages-container';
 import { ProjectHeader } from '@/modules/projects/ui/components/project-header';
 
+import { CodeView } from '@/components/code-view';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -76,7 +77,7 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 							</TabsContent>
 
 							<TabsContent value='code'>
-								<p>TODO: Code</p>
+								<CodeView lang='ts' code={`const a = 'Hello, world!';`} />
 							</TabsContent>
 						</Tabs>
 					)}
