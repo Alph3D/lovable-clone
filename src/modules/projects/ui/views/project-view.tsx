@@ -42,40 +42,44 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 				<ResizableHandle withHandle />
 
 				<ResizablePanel defaultSize={65} minSize={50}>
-					<Tabs
-						className='h-full gap-y-0'
-						defaultValue='preview'
-						value={tabState}
-						onValueChange={(value) => setTabState(value as 'preview' | 'code')}
-					>
-						<div className='flex w-full items-center gap-x-2 border-b p-2'>
-							<TabsList className='h-8 rounded-md border p-0'>
-								<TabsTrigger value='preview' className='rounded-md'>
-									<EyeIcon />
-									<span>Demo</span>
-								</TabsTrigger>
+					{!!activeFragment && (
+						<Tabs
+							className='h-full gap-y-0'
+							defaultValue='preview'
+							value={tabState}
+							onValueChange={(value) => setTabState(value as 'preview' | 'code')}
+						>
+							<div className='flex w-full items-center gap-x-2 border-b p-2'>
+								<TabsList className='h-8 rounded-md border p-0'>
+									<TabsTrigger value='preview' className='rounded-md'>
+										<EyeIcon />
+										<span>Demo</span>
+									</TabsTrigger>
 
-								<TabsTrigger value='code' className='rounded-md'>
-									<CodeIcon />
-									<span>Code</span>
-								</TabsTrigger>
-							</TabsList>
+									<TabsTrigger value='code' className='rounded-md'>
+										<CodeIcon />
+										<span>Code</span>
+									</TabsTrigger>
+								</TabsList>
 
-							<div className='ml-auto flex items-center gap-x-2'>
-								<Button size='sm' asChild>
-									<Link href='/pricing'>
-										<CrownIcon /> Upgrade
-									</Link>
-								</Button>
+								<div className='ml-auto flex items-center gap-x-2'>
+									<Button size='sm' asChild>
+										<Link href='/pricing'>
+											<CrownIcon /> Upgrade
+										</Link>
+									</Button>
+								</div>
 							</div>
-						</div>
 
-						<TabsContent value='preview'>{!!activeFragment && <FragmentWeb data={activeFragment} />}</TabsContent>
+							<TabsContent value='preview'>
+								<FragmentWeb data={activeFragment} />
+							</TabsContent>
 
-						<TabsContent value='code'>
-							<p>TODO: Code</p>
-						</TabsContent>
-					</Tabs>
+							<TabsContent value='code'>
+								<p>TODO: Code</p>
+							</TabsContent>
+						</Tabs>
+					)}
 				</ResizablePanel>
 			</ResizablePanelGroup>
 		</div>
