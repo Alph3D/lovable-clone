@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { useClerk } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowUpIcon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -19,8 +22,12 @@ import { Form, FormField } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/trpc/client';
 
+const STORAGE_KEY = 'project-form-value';
+
 export const ProjectForm = () => {
 	const router = useRouter();
+	const { openSignUp } = useClerk();
+	const { resolvedTheme } = useTheme();
 
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -33,15 +40,50 @@ export const ProjectForm = () => {
 		resolver: zodResolver(CreateProjectSchema),
 	});
 
+	// Load value from localStorage on mount
+	useEffect(() => {
+		const savedValue = localStorage.getItem(STORAGE_KEY);
+		if (savedValue) {
+			form.setValue('value', savedValue, { shouldDirty: true, shouldTouch: true, shouldValidate: true });
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	// Watch for value changes and save to localStorage
+	const formValue = form.watch('value');
+	useEffect(() => {
+		if (formValue) {
+			localStorage.setItem(STORAGE_KEY, formValue);
+		} else {
+			localStorage.removeItem(STORAGE_KEY);
+		}
+	}, [formValue]);
+
 	const createProject = useMutation(
 		trpc.projects.create.mutationOptions({
 			onError: (error) => {
+				if (error.data?.code === 'UNAUTHORIZED')
+					return openSignUp({
+						appearance: {
+							captcha: {
+								theme: resolvedTheme === 'dark' ? 'dark' : 'light',
+							},
+							elements: {
+								cardBox: 'border! shadow-none! rounded-lg!',
+							},
+							theme: resolvedTheme === 'dark' ? dark : undefined,
+						},
+					});
+
 				// TODO: Redirect to pricing page if specific error (potentially PAYMENT_REQUIRED)
 				toast.error(error.message || 'Failed to create project!');
 			},
 			onSuccess: ({ id }) => {
 				queryClient.invalidateQueries(trpc.projects.getMany.queryOptions());
 				// TODO: Invalidate usage status
+
+				// Clear localStorage on successful submission
+				localStorage.removeItem(STORAGE_KEY);
 
 				router.push(`/projects/${id}`);
 			},
@@ -94,6 +136,7 @@ export const ProjectForm = () => {
 										form.handleSubmit(onSubmit)(e);
 									}
 								}}
+								autoFocus
 							/>
 						)}
 					/>
@@ -123,7 +166,10 @@ export const ProjectForm = () => {
 							variant='outline'
 							size='sm'
 							className='dark:bg-sidebar bg-white'
-							onClick={() => onSelect(template.prompt)}
+							onClick={() => {
+								onSelect(template.prompt);
+								form.setFocus('value');
+							}}
 						>
 							{template.emoji} {template.title}
 						</Button>
