@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react';
 import Link from 'next/link';
 
+import { UserButton } from '@clerk/nextjs';
 import { CodeIcon, CrownIcon, EyeIcon } from 'lucide-react';
 
 import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
@@ -70,6 +71,8 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 											<CrownIcon /> Upgrade
 										</Link>
 									</Button>
+
+									<UserButton />
 								</div>
 							</div>
 
