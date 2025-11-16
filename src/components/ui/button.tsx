@@ -31,6 +31,8 @@ const buttonVariants = cva(
 				outline:
 					'bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs',
 				secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+				tertiary:
+					'bg-primary/25 dark:bg-primary/30 text-primary hover:bg-primary/20 dark:hover:bg-primary/25 shadow-xs',
 			},
 		},
 	}
