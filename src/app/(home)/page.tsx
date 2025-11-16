@@ -1,4 +1,5 @@
 import { ProjectForm } from '@/modules/home/ui/components/project-form';
+import { ProjectsList } from '@/modules/home/ui/components/projects-list';
 
 const HomePage = () => {
 	return (
@@ -17,6 +18,8 @@ const HomePage = () => {
 					<ProjectForm />
 				</div>
 			</section>
+
+			<ProjectsList />
 		</div>
 	);
 };
