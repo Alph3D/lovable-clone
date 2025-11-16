@@ -46,18 +46,18 @@ export const ProjectHeader = ({ projectId }: ProjectHeaderProps) => {
 				</DropdownMenuTrigger>
 
 				<DropdownMenuContent side='bottom' align='start'>
-					<DropdownMenuItem asChild>
+					<DropdownMenuItem className='gap-0.5' asChild>
 						<Link href='/'>
-							<ChevronLeftIcon />
-							<span>Go to Dashboard</span>
+							<ChevronLeftIcon className='size-5' strokeWidth={2.1} />
+							<span>Back to Dashboard</span>
 						</Link>
 					</DropdownMenuItem>
 
 					<DropdownMenuSeparator />
 
 					<DropdownMenuSub>
-						<DropdownMenuSubTrigger className='gap-2'>
-							<SunMoonIcon className='text-muted-foreground size-4' />
+						<DropdownMenuSubTrigger className='gap-1.5'>
+							<SunMoonIcon className='text-muted-foreground size-5' strokeWidth={2.1} />
 							<span>Appearance</span>
 						</DropdownMenuSubTrigger>
 

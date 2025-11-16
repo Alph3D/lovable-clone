@@ -139,7 +139,7 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
 							</Hint>
 						</div>
 
-						<div className='flex-1 overflow-auto'>
+						<div className='custom-scrollbar flex-1 overflow-auto'>
 							<CodeView code={files[selectedFile]} lang={getLanguageFromExtension(selectedFile)} />
 						</div>
 					</div>

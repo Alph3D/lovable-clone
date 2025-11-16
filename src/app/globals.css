@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@plugin 'tailwind-scrollbar' {
+	preferredstrategy: 'pseudoelements';
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -158,6 +161,7 @@
 	* {
 		@apply border-border outline-ring/50;
 	}
+
 	body {
 		@apply bg-background text-foreground;
 	}
@@ -168,6 +172,10 @@
 	[role='button']:not([disabled]) {
 		cursor: pointer;
 	}
+}
+
+@utility custom-scrollbar {
+	@apply scrollbar-thin scrollbar-track-background scrollbar-thumb-muted-foreground scrollbar-hover:scrollbar-thumb-muted-foreground/60 scrollbar-active:scrollbar-thumb-muted-foreground/30;
 }
 
 /* Animations */
