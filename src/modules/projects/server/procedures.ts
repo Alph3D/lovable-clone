@@ -2,7 +2,7 @@ import { TRPCError } from '@trpc/server';
 import { generateSlug } from 'random-word-slugs';
 import { z } from 'zod';
 
-import { MAX_MESSAGE_LENGTH, MIN_MESSAGE_LENGTH } from '@/modules/messages/config';
+import { CreateProjectSchema } from '@/modules/projects/schemas/create-project-schema';
 
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
@@ -10,44 +10,34 @@ import { db } from '@/lib/db';
 import { baseProcedure, createTRPCRouter } from '@/trpc/init';
 
 export const projectsRouter = createTRPCRouter({
-	create: baseProcedure
-		.input(
-			z.object({
-				value: z
-					.string()
-					.trim()
-					.min(MIN_MESSAGE_LENGTH, 'Value is required!')
-					.max(MAX_MESSAGE_LENGTH, 'Value is too long!'),
-			})
-		)
-		.mutation(async ({ input }) => {
-			const { value } = input;
+	create: baseProcedure.input(CreateProjectSchema).mutation(async ({ input }) => {
+		const { value } = input;
 
-			const project = await db.project.create({
-				data: {
-					messages: {
-						create: {
-							content: value,
-							role: MessageRole.USER,
-							type: MessageType.RESULT,
-						},
+		const project = await db.project.create({
+			data: {
+				messages: {
+					create: {
+						content: value,
+						role: MessageRole.USER,
+						type: MessageType.RESULT,
 					},
-					name: generateSlug(2, {
-						format: 'kebab',
-					}),
 				},
-			});
+				name: generateSlug(2, {
+					format: 'kebab',
+				}),
+			},
+		});
 
-			await inngest.send({
-				data: {
-					projectId: project.id,
-					value: value,
-				},
-				name: 'code-agent/run',
-			});
+		await inngest.send({
+			data: {
+				projectId: project.id,
+				value: value,
+			},
+			name: 'code-agent/run',
+		});
 
-			return project;
-		}),
+		return project;
+	}),
 	getMany: baseProcedure.query(async () => {
 		const projects = await db.project.findMany({
 			orderBy: {

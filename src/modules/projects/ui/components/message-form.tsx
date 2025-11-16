@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,7 +37,7 @@ export const MessageForm = ({ projectId }: MessageFormProps) => {
 	const createMessage = useMutation(
 		trpc.messages.create.mutationOptions({
 			onError: (error) => {
-				// Redirect to pricing page if specific error (potentially PAYMENT_REQUIRED)
+				// TODO: Redirect to pricing page if specific error (potentially PAYMENT_REQUIRED)
 				toast.error(error.message || 'Failed to create message!');
 			},
 			onSuccess: () => {
