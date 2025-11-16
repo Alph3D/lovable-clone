@@ -7,11 +7,12 @@ import { CreateProjectSchema } from '@/modules/projects/schemas/create-project-s
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
 import { db } from '@/lib/db';
-import { baseProcedure, createTRPCRouter } from '@/trpc/init';
+import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
 
 export const projectsRouter = createTRPCRouter({
-	create: baseProcedure.input(CreateProjectSchema).mutation(async ({ input }) => {
+	create: protectedProcedure.input(CreateProjectSchema).mutation(async ({ input, ctx }) => {
 		const { value } = input;
+		const { userId } = ctx.auth;
 
 		const project = await db.project.create({
 			data: {
@@ -25,6 +26,7 @@ export const projectsRouter = createTRPCRouter({
 				name: generateSlug(2, {
 					format: 'kebab',
 				}),
+				userId,
 			},
 		});
 
@@ -38,27 +40,34 @@ export const projectsRouter = createTRPCRouter({
 
 		return project;
 	}),
-	getMany: baseProcedure.query(async () => {
+	getMany: protectedProcedure.query(async ({ ctx }) => {
+		const { userId } = ctx.auth;
+
 		const projects = await db.project.findMany({
 			orderBy: {
 				updatedAt: 'desc',
+			},
+			where: {
+				userId,
 			},
 		});
 
 		return projects;
 	}),
-	getOne: baseProcedure
+	getOne: protectedProcedure
 		.input(
 			z.object({
 				id: z.uuid().trim().min(1, 'ID is required!'),
 			})
 		)
-		.query(async ({ input }) => {
+		.query(async ({ input, ctx }) => {
 			const { id } = input;
+			const { userId } = ctx.auth;
 
 			const project = await db.project.findUnique({
 				where: {
 					id,
+					userId,
 				},
 			});
 
