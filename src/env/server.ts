@@ -17,6 +17,7 @@ export const env = createEnv({
 		throw new Error('❌ Invalid environment variables');
 	},
 	server: {
+		CLERK_SECRET_KEY: z.string().trim().min(1).startsWith('sk_'),
 		DATABASE_URL: z.url().trim(),
 		E2B_API_KEY: z.string().trim().min(1).startsWith('e2b_'),
 		NODE_ENV: z.enum(['development', 'production', 'test']).default('development').optional(),
