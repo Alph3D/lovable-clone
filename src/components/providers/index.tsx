@@ -9,7 +9,14 @@ import { ToasterProvider } from './toaster-provider';
 
 export const Providers = ({ children }: Readonly<PropsWithChildren>) => {
 	return (
-		<ClerkProvider afterSignOutUrl='/'>
+		<ClerkProvider
+			afterSignOutUrl='/'
+			appearance={{
+				variables: {
+					colorPrimary: '#C96342',
+				},
+			}}
+		>
 			<TRPCReactProvider>
 				<ThemeProvider
 					attribute='class'

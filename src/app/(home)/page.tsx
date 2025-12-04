@@ -1,5 +1,3 @@
-import { GoogleOneTap } from '@clerk/nextjs';
-
 import { ProjectForm } from '@/modules/home/ui/components/project-form';
 import { ProjectsList } from '@/modules/home/ui/components/projects-list';
 
@@ -22,8 +20,6 @@ const HomePage = () => {
 			</section>
 
 			<ProjectsList />
-
-			<GoogleOneTap />
 		</div>
 	);
 };
