@@ -1,3 +1,4 @@
+import type { Message } from '@inngest/agent-kit';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -83,4 +84,17 @@ export const convertFilesToTreeItems = (files: { [path: string]: string }): Tree
 	const result = convertNode(tree);
 
 	return Array.isArray(result) ? result : [result];
+};
+
+interface GenerateTextFromMessageProps {
+	defaultText: string;
+	message: Message;
+}
+
+export const generateTextFromMessage = ({ defaultText, message }: GenerateTextFromMessageProps): string => {
+	if (message.type !== 'text') return defaultText;
+
+	if (Array.isArray(message.content)) return message.content.join(' ');
+
+	return message.content;
 };

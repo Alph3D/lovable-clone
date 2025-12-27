@@ -1,11 +1,20 @@
 import { Sandbox } from '@e2b/code-interpreter';
-import { createAgent, createNetwork, createTool, openai, type Tool } from '@inngest/agent-kit';
+import {
+	createAgent,
+	createNetwork,
+	createState,
+	createTool,
+	openai,
+	type Message,
+	type Tool,
+} from '@inngest/agent-kit';
 import { z } from 'zod';
 
-import { PROMPT } from '@/config';
+import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from '@/config';
 import { env } from '@/env/server';
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { db } from '@/lib/db';
+import { generateTextFromMessage } from '@/lib/utils';
 
 import { inngest } from './client';
 import { getLastAssistantTextMessageContent, getSandbox } from './utils';
@@ -24,6 +33,39 @@ export const codeAgentFunction = inngest.createFunction(
 
 			return sandbox.sandboxId;
 		});
+
+		const previousMessages = await step.run('get-previous-messages', async () => {
+			const formattedMessages: Message[] = [];
+
+			const messages = await db.message.findMany({
+				orderBy: {
+					createdAt: 'desc', // TODO: Change to 'asc' if needed
+				},
+				where: {
+					projectId: event.data.projectId,
+				},
+			});
+
+			for (const message of messages) {
+				formattedMessages.push({
+					content: message.content,
+					role: message.role === MessageRole.ASSISTANT ? 'assistant' : 'user',
+					type: 'text',
+				});
+			}
+
+			return formattedMessages;
+		});
+
+		const state = createState<AgentState>(
+			{
+				files: {},
+				summary: '',
+			},
+			{
+				messages: previousMessages,
+			}
+		);
 
 		const codeAgent = createAgent<AgentState>({
 			description: 'An expert coding agent',
@@ -136,6 +178,7 @@ export const codeAgentFunction = inngest.createFunction(
 
 		const network = createNetwork<AgentState>({
 			agents: [codeAgent],
+			defaultState: state,
 			maxIter: 15,
 			name: 'code-agent-network',
 			router: async ({ network }) => {
@@ -147,7 +190,24 @@ export const codeAgentFunction = inngest.createFunction(
 			},
 		});
 
-		const result = await network.run(event.data.value);
+		const result = await network.run(event.data.value, { state });
+
+		const fragmentTitleGenerator = createAgent({
+			description: 'A fragment title generator',
+			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o' }),
+			name: 'fragment-title-generator',
+			system: FRAGMENT_TITLE_PROMPT,
+		});
+
+		const responseGenerator = createAgent({
+			description: 'A response title generator',
+			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o' }),
+			name: 'response-title-generator',
+			system: RESPONSE_PROMPT,
+		});
+
+		const { output: fragmentTitleOutput } = await fragmentTitleGenerator.run(result.state.data.summary);
+		const { output: responseOutput } = await responseGenerator.run(result.state.data.summary);
 
 		const isError = !result.state.data.summary || Object.keys(result.state.data.files || {}).length === 0;
 
@@ -173,12 +233,12 @@ export const codeAgentFunction = inngest.createFunction(
 
 			return await db.message.create({
 				data: {
-					content: result.state.data.summary,
+					content: generateTextFromMessage({ defaultText: 'Here you go', message: responseOutput[0] }),
 					fragment: {
 						create: {
 							files: result.state.data.files,
 							sandboxUrl,
-							title: 'Fragment',
+							title: generateTextFromMessage({ defaultText: 'Fragment', message: fragmentTitleOutput[0] }),
 						},
 					},
 					projectId: event.data.projectId,
