@@ -194,14 +194,14 @@ export const codeAgentFunction = inngest.createFunction(
 
 		const fragmentTitleGenerator = createAgent({
 			description: 'A fragment title generator',
-			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o' }),
+			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o-mini' }),
 			name: 'fragment-title-generator',
 			system: FRAGMENT_TITLE_PROMPT,
 		});
 
 		const responseGenerator = createAgent({
 			description: 'A response title generator',
-			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o' }),
+			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o-mini' }),
 			name: 'response-title-generator',
 			system: RESPONSE_PROMPT,
 		});
