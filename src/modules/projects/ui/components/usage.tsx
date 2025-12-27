@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Link from 'next/link';
 
 import { useAuth } from '@clerk/nextjs';
@@ -15,7 +16,25 @@ export const Usage = ({ points, msBeforeNext }: UsageProps) => {
 	const { has } = useAuth();
 
 	const hasProAccess = has?.({ plan: 'pro' }) || false;
-	const now = new Date();
+
+	const resetTime = useMemo(() => {
+		try {
+			const now = new Date();
+
+			return formatDuration(
+				intervalToDuration({
+					end: new Date(now.getTime() + msBeforeNext),
+					start: now,
+				}),
+				{
+					format: ['months', 'days', 'hours'],
+				}
+			);
+		} catch (error) {
+			console.error('Error formatting duration: ', error);
+			return '...';
+		}
+	}, [msBeforeNext]);
 
 	return (
 		<div className='bg-background rounded-t-xl border border-b-0 p-2.5'>
@@ -25,18 +44,7 @@ export const Usage = ({ points, msBeforeNext }: UsageProps) => {
 						{points} {hasProAccess ? '' : 'free'} credits remaining
 					</p>
 
-					<p className='text-muted-foreground text-xs'>
-						Resets in{' '}
-						{formatDuration(
-							intervalToDuration({
-								end: new Date(now.getTime() + msBeforeNext),
-								start: now,
-							}),
-							{
-								format: ['months', 'days', 'hours'],
-							}
-						)}
-					</p>
+					<p className='text-muted-foreground text-xs'>Resets in {resetTime}</p>
 				</div>
 
 				{!hasProAccess && (

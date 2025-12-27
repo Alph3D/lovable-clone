@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { ProjectView } from '@/modules/projects/ui/views/project-view';
 
@@ -30,9 +31,11 @@ const ProjectIdPage = async ({ params }: ProjectIdPageProps) => {
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
-			<Suspense fallback={<p>Loading...</p>}>
-				<ProjectView projectId={projectId} />
-			</Suspense>
+			<ErrorBoundary fallback={<p>Error</p>}>
+				<Suspense fallback={<p>Loading...</p>}>
+					<ProjectView projectId={projectId} />
+				</Suspense>
+			</ErrorBoundary>
 		</HydrationBoundary>
 	);
 };
