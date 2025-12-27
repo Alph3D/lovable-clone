@@ -11,6 +11,7 @@ import {
 import { z } from 'zod';
 
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from '@/config';
+import { SANDBOX_TIMEOUT } from '@/constants';
 import { env } from '@/env/server';
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { db } from '@/lib/db';
@@ -31,6 +32,7 @@ export const codeAgentFunction = inngest.createFunction(
 		const sandboxId = await step.run('get-sandbox-id', async () => {
 			const sandbox = await Sandbox.create('vibe-nextjs-test-9900');
 
+			await sandbox.setTimeout(SANDBOX_TIMEOUT);
 			return sandbox.sandboxId;
 		});
 
@@ -39,8 +41,9 @@ export const codeAgentFunction = inngest.createFunction(
 
 			const messages = await db.message.findMany({
 				orderBy: {
-					createdAt: 'desc', // TODO: Change to 'asc' if needed
+					createdAt: 'desc',
 				},
+				take: 5,
 				where: {
 					projectId: event.data.projectId,
 				},
@@ -54,7 +57,7 @@ export const codeAgentFunction = inngest.createFunction(
 				});
 			}
 
-			return formattedMessages;
+			return formattedMessages.reverse();
 		});
 
 		const state = createState<AgentState>(
