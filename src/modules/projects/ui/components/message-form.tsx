@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowUpIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -17,16 +18,20 @@ import { Form, FormField } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/trpc/client';
 
+import { Usage } from './usage';
+
 interface MessageFormProps {
 	projectId: string;
 }
 
 export const MessageForm = ({ projectId }: MessageFormProps) => {
-	const [isFocused, setIsFocused] = useState(false);
-	const showUsage = false;
-
 	const trpc = useTRPC();
+	const router = useRouter();
 	const queryClient = useQueryClient();
+	const [isFocused, setIsFocused] = useState(false);
+
+	const { data: usage } = useQuery(trpc.usage.status.queryOptions());
+
 	const form = useForm<z.infer<typeof CreateMessageSchema>>({
 		defaultValues: {
 			value: '',
@@ -37,14 +42,15 @@ export const MessageForm = ({ projectId }: MessageFormProps) => {
 	const createMessage = useMutation(
 		trpc.messages.create.mutationOptions({
 			onError: (error) => {
-				// TODO: Redirect to pricing page if specific error (potentially PAYMENT_REQUIRED)
+				if (error.data?.code === 'TOO_MANY_REQUESTS') return router.push('/pricing');
+
 				toast.error(error.message || 'Failed to create message!');
 			},
 			onSuccess: () => {
 				form.reset();
 
 				queryClient.invalidateQueries(trpc.messages.getMany.queryOptions({ projectId }));
-				// TODO: Invalidate usage status
+				queryClient.invalidateQueries(trpc.usage.status.queryOptions());
 			},
 		})
 	);
@@ -58,9 +64,12 @@ export const MessageForm = ({ projectId }: MessageFormProps) => {
 
 	const isPending = createMessage.isPending;
 	const isDisabled = isPending || !form.formState.isValid;
+	const showUsage = !!usage;
 
 	return (
 		<Form {...form}>
+			{showUsage && <Usage points={usage.remainingPoints} msBeforeNext={usage.msBeforeNext} />}
+
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className={cn(

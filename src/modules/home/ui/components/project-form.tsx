@@ -75,12 +75,13 @@ export const ProjectForm = () => {
 						},
 					});
 
-				// TODO: Redirect to pricing page if specific error (potentially PAYMENT_REQUIRED)
+				if (error.data?.code === 'TOO_MANY_REQUESTS') return router.push('/pricing');
+
 				toast.error(error.message || 'Failed to create project!');
 			},
 			onSuccess: ({ id }) => {
 				queryClient.invalidateQueries(trpc.projects.getMany.queryOptions());
-				// TODO: Invalidate usage status
+				queryClient.invalidateQueries(trpc.usage.status.queryOptions());
 
 				// Clear localStorage on successful submission
 				localStorage.removeItem(STORAGE_KEY);

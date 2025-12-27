@@ -2,6 +2,7 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { CreateMessageSchema } from '@/modules/messages/schemas/create-message-schema';
+import { consumeCredits } from '@/modules/usage/lib/usage';
 
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
@@ -27,6 +28,16 @@ export const messagesRouter = createTRPCRouter({
 			});
 
 			if (existingProjectCount === 0) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found!' });
+
+			try {
+				await consumeCredits();
+			} catch (error) {
+				if (error instanceof Error) {
+					throw new TRPCError({ code: 'BAD_REQUEST', message: error.message || 'Something went wrong!' });
+				} else {
+					throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits!" });
+				}
+			}
 
 			const message = await db.message.create({
 				data: {

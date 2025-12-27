@@ -3,6 +3,7 @@ import { generateSlug } from 'random-word-slugs';
 import { z } from 'zod';
 
 import { CreateProjectSchema } from '@/modules/projects/schemas/create-project-schema';
+import { consumeCredits } from '@/modules/usage/lib/usage';
 
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
@@ -11,6 +12,16 @@ import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
 
 export const projectsRouter = createTRPCRouter({
 	create: protectedProcedure.input(CreateProjectSchema).mutation(async ({ input, ctx }) => {
+		try {
+			await consumeCredits();
+		} catch (error) {
+			if (error instanceof Error) {
+				throw new TRPCError({ code: 'BAD_REQUEST', message: error.message || 'Something went wrong!' });
+			} else {
+				throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits!" });
+			}
+		}
+
 		const { value } = input;
 		const { userId } = ctx.auth;
 
