@@ -48,7 +48,7 @@ export const FragmentWeb = ({ data }: FragmentWebProps) => {
 
 			setTimeout(() => setCopied(false), 2000); // 2 seconds
 		} catch (error) {
-			toast.error(error instanceof Error ? error.message : 'Failed to copy to clipboard!');
+			toast.error(error instanceof Error ? error.message : 'Failed to copy to clipboard');
 		}
 	};
 

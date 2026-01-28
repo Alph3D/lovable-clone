@@ -1,31 +1,15 @@
-'use client';
+import type { Metadata } from 'next';
 
-import { SignUp } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
-import { useTheme } from 'next-themes';
+import { SignUpView } from '@/modules/auth/ui/views/sign-up-view';
+
+export const metadata: Metadata = {
+	description:
+		'Create your Vibe account to manage projects, view personalized recommendations, and enjoy seamless collaboration. Sign up now to unlock the full suite of productivity features tailored for creative professionals.',
+	title: 'Sign Up',
+};
 
 const SignUpPage = () => {
-	const { resolvedTheme } = useTheme();
-
-	return (
-		<div className='mx-auto flex w-full max-w-3xl flex-col'>
-			<section className='space-y-6 pt-[16vh] 2xl:pt-48'>
-				<div className='flex flex-col items-center'>
-					<SignUp
-						appearance={{
-							captcha: {
-								theme: resolvedTheme === 'dark' ? 'dark' : 'light',
-							},
-							elements: {
-								cardBox: 'border! shadow-none! rounded-lg!',
-							},
-							theme: resolvedTheme === 'dark' ? dark : undefined,
-						}}
-					/>
-				</div>
-			</section>
-		</div>
-	);
+	return <SignUpView />;
 };
 
 export default SignUpPage;

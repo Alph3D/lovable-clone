@@ -42,7 +42,7 @@ export const codeAgentFunction = inngest.createFunction(
 				},
 			});
 
-			if (!project) throw new NonRetriableError('Project not found!');
+			if (!project) throw new NonRetriableError('Project not found');
 
 			const settings = await db.userSettings.findUnique({
 				where: {
@@ -50,7 +50,7 @@ export const codeAgentFunction = inngest.createFunction(
 				},
 			});
 
-			if (!settings) throw new NonRetriableError('AI settings not found!');
+			if (!settings) throw new NonRetriableError('AI settings not found');
 
 			return decrypt(settings.apiKey);
 		});

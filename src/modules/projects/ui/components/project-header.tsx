@@ -39,11 +39,11 @@ export const ProjectHeader = ({ projectId }: ProjectHeaderProps) => {
 	const deleteProject = useMutation(
 		trpc.projects.remove.mutationOptions({
 			onError: (error) => {
-				toast.error(error.message || 'Failed to delete project!');
+				toast.error(error.message || 'Failed to delete project');
 			},
 			onSuccess: async () => {
 				await queryClient.invalidateQueries(trpc.projects.getMany.queryOptions());
-				toast.success('Project deleted successfully!');
+				toast.success('Project deleted successfully');
 				router.push('/');
 			},
 		})

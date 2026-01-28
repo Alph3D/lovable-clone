@@ -32,7 +32,7 @@ export const settingsRouter = createTRPCRouter({
 			},
 		});
 
-		if (!settings) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to remove AI Settings!' });
+		if (!settings) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to remove AI Settings' });
 
 		return settings;
 	}),
@@ -53,10 +53,10 @@ export const settingsRouter = createTRPCRouter({
 				code: 'BAD_REQUEST',
 				message:
 					error instanceof OpenAIError
-						? 'Invalid API Key!'
+						? 'Invalid API Key'
 						: error instanceof Error
 							? error.message
-							: 'Failed to verify API key!',
+							: 'Failed to verify API key',
 			});
 		}
 
@@ -75,7 +75,7 @@ export const settingsRouter = createTRPCRouter({
 			},
 		});
 
-		if (!settings) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to save AI Settings!' });
+		if (!settings) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to save AI Settings' });
 
 		return settings;
 	}),

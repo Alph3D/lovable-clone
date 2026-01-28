@@ -22,19 +22,19 @@ export const projectsRouter = createTRPCRouter({
 			},
 		});
 
-		if (!settings) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+		if (!settings) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found' });
 
 		const apiKey = decrypt(settings.apiKey);
 
-		if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+		if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found' });
 
 		try {
 			await consumeCredits();
 		} catch (error) {
 			if (error instanceof Error) {
-				throw new TRPCError({ code: 'BAD_REQUEST', message: error.message || 'Something went wrong!' });
+				throw new TRPCError({ code: 'BAD_REQUEST', message: error.message || 'Something went wrong' });
 			} else {
-				throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits!" });
+				throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits" });
 			}
 		}
 
@@ -81,7 +81,7 @@ export const projectsRouter = createTRPCRouter({
 	getOne: protectedProcedure
 		.input(
 			z.object({
-				id: z.uuid().trim().min(1, 'ID is required!'),
+				id: z.uuid().trim().min(1, 'ID is required'),
 			})
 		)
 		.query(async ({ input, ctx }) => {
@@ -95,12 +95,12 @@ export const projectsRouter = createTRPCRouter({
 				},
 			});
 
-			if (!project) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found!' });
+			if (!project) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found' });
 
 			return project;
 		}),
 	remove: protectedProcedure
-		.input(z.object({ id: z.uuid().trim().min(1, 'ID is required!') }))
+		.input(z.object({ id: z.uuid().trim().min(1, 'ID is required') }))
 		.mutation(async ({ input, ctx }) => {
 			const { id: projectId } = input;
 			const { userId } = ctx.auth;
@@ -116,7 +116,7 @@ export const projectsRouter = createTRPCRouter({
 		}),
 	update: protectedProcedure
 		.input(
-			z.object({ id: z.uuid().trim().min(1, 'ID is required!'), name: z.string().trim().min(1, 'Name is required!') })
+			z.object({ id: z.uuid().trim().min(1, 'ID is required'), name: z.string().trim().min(1, 'Name is required') })
 		)
 		.mutation(async ({ input, ctx }) => {
 			const { id: projectId, name } = input;

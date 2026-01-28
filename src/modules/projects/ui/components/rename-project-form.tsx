@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { useTRPC } from '@/trpc/client';
 
 const RenameProjectSchema = z.object({
-	name: z.string().trim().min(1, 'Name is required!'),
+	name: z.string().trim().min(1, 'Name is required'),
 });
 
 interface RenameProjectFormProps {
@@ -35,13 +35,13 @@ export const RenameProjectForm = ({ projectId, initialName, onSuccess }: RenameP
 	const updateProject = useMutation(
 		trpc.projects.update.mutationOptions({
 			onError: (error) => {
-				toast.error(error.message || 'Failed to rename project!');
+				toast.error(error.message || 'Failed to rename project');
 			},
 			onSuccess: async () => {
 				await queryClient.invalidateQueries(trpc.projects.getMany.queryOptions());
 				await queryClient.invalidateQueries(trpc.projects.getOne.queryOptions({ id: projectId }));
 
-				toast.success('Project renamed successfully!');
+				toast.success('Project renamed successfully');
 				onSuccess();
 			},
 		})

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 		const authHeader = req.headers.get('authorization');
 		if (authHeader !== `Bearer ${env.CRON_SECRET}`) {
 			return NextResponse.json(
-				{ error: 'Unauthorized!' },
+				{ error: 'Unauthorized' },
 				{
 					status: UNAUTHORIZED,
 				}
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({ status: OK });
 	} catch (error) {
 		return NextResponse.json(
-			{ error: error instanceof Error ? error.message : 'Failed to delete AI Settings!' },
+			{ error: error instanceof Error ? error.message : 'Failed to delete AI Settings' },
 			{
 				status: INTERNAL_SERVER_ERROR,
 			}

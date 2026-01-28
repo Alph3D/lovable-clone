@@ -40,12 +40,12 @@ const ProjectItem = ({ project }: ProjectItemProps) => {
 	const deleteProject = useMutation(
 		trpc.projects.remove.mutationOptions({
 			onError: (error) => {
-				toast.error(error.message || 'Failed to delete project!');
+				toast.error(error.message || 'Failed to delete project');
 			},
 			onSuccess: async ({ id }) => {
 				await queryClient.invalidateQueries(trpc.projects.getMany.queryOptions());
 				await queryClient.invalidateQueries(trpc.projects.getOne.queryOptions({ id }));
-				toast.success('Project deleted successfully!');
+				toast.success('Project deleted successfully');
 			},
 		})
 	);

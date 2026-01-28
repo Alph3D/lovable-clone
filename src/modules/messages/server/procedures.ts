@@ -14,7 +14,7 @@ export const messagesRouter = createTRPCRouter({
 	create: protectedProcedure
 		.input(
 			CreateMessageSchema.extend({
-				projectId: z.uuid().trim().min(1, 'Project ID is required!'),
+				projectId: z.uuid().trim().min(1, 'Project ID is required'),
 			})
 		)
 		.mutation(async ({ input, ctx }) => {
@@ -28,7 +28,7 @@ export const messagesRouter = createTRPCRouter({
 				},
 			});
 
-			if (existingProjectCount === 0) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found!' });
+			if (existingProjectCount === 0) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found' });
 
 			const settings = await db.userSettings.findUnique({
 				where: {
@@ -36,19 +36,19 @@ export const messagesRouter = createTRPCRouter({
 				},
 			});
 
-			if (!settings) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+			if (!settings) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found' });
 
 			const apiKey = decrypt(settings.apiKey);
 
-			if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+			if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found' });
 
 			try {
 				await consumeCredits();
 			} catch (error) {
 				if (error instanceof Error) {
-					throw new TRPCError({ code: 'BAD_REQUEST', message: error.message || 'Something went wrong!' });
+					throw new TRPCError({ code: 'BAD_REQUEST', message: error.message || 'Something went wrong' });
 				} else {
-					throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits!" });
+					throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits" });
 				}
 			}
 
@@ -74,7 +74,7 @@ export const messagesRouter = createTRPCRouter({
 	getMany: protectedProcedure
 		.input(
 			z.object({
-				projectId: z.uuid().trim().min(1, 'Project ID is required!'),
+				projectId: z.uuid().trim().min(1, 'Project ID is required'),
 			})
 		)
 		.query(async ({ input, ctx }) => {

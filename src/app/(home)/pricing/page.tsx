@@ -1,41 +1,15 @@
-'use client';
+import type { Metadata } from 'next';
 
-import { PricingTable } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
-import { useTheme } from 'next-themes';
+import { PricingView } from '@/modules/pricing/ui/views/pricing-view';
+
+export const metadata: Metadata = {
+	description:
+		'Explore our suite of carefully tailored subscription plans—each designed for different needs and ambitions. Evaluate the included features, compare details, and select only the plan that aligns perfectly with your workflow and desired level of support.',
+	title: 'Pricing',
+};
 
 const PricingPage = () => {
-	const { resolvedTheme } = useTheme();
-
-	return (
-		<div className='mx-auto flex w-full max-w-3xl flex-col'>
-			<section className='space-y-6 pt-[16vh] 2xl:pt-48'>
-				<div className='flex flex-col items-center'>
-					<img src='/logo.svg' alt='Vibe logo' width={50} height={50} className='hidden md:block' />
-				</div>
-
-				<h1 className='text-center text-xl font-bold md:text-3xl'>Pricing</h1>
-				<p className='text-muted-foreground text-center text-sm md:text-base'>Choose the plan that fits your needs</p>
-
-				<PricingTable
-					appearance={{
-						elements: {
-							pricingTable: 'border-none! shadow-none! rounded-lg!',
-						},
-						theme: resolvedTheme === 'dark' ? dark : undefined,
-					}}
-					checkoutProps={{
-						appearance: {
-							elements: {
-								drawerRoot: 'z-[99999]!',
-							},
-							theme: resolvedTheme === 'dark' ? dark : undefined,
-						},
-					}}
-				/>
-			</section>
-		</div>
-	);
+	return <PricingView />;
 };
 
 export default PricingPage;

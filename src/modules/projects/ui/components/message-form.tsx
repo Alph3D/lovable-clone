@@ -45,13 +45,13 @@ export const MessageForm = ({ projectId }: MessageFormProps) => {
 		trpc.messages.create.mutationOptions({
 			onError: (error) => {
 				if (error.data?.code === 'PRECONDITION_FAILED') {
-					toast.error('API key not set!');
+					toast.error('API key not set');
 					return openSettingsModal();
 				}
 
 				if (error.data?.code === 'TOO_MANY_REQUESTS') return router.push('/pricing');
 
-				toast.error(error.message || 'Failed to create message!');
+				toast.error(error.message || 'Failed to create message');
 			},
 			onSuccess: () => {
 				form.reset();

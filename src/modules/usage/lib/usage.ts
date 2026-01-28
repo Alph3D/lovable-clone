@@ -22,7 +22,7 @@ export const getUsageTracker = async () => {
 export const consumeCredits = async () => {
 	const { userId } = await auth();
 
-	if (!userId) throw new Error('Unauthorized!');
+	if (!userId) throw new Error('Unauthorized');
 
 	const usageTracker = await getUsageTracker();
 	const result = await usageTracker.consume(userId, GENERATION_COST);
@@ -33,7 +33,7 @@ export const consumeCredits = async () => {
 export const getUsageStatus = async () => {
 	const { userId } = await auth();
 
-	if (!userId) throw new Error('Unauthorized!');
+	if (!userId) throw new Error('Unauthorized');
 
 	const usageTracker = await getUsageTracker();
 	const result = await usageTracker.get(userId);

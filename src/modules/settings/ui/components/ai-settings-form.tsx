@@ -40,12 +40,12 @@ export const AISettingsForm = () => {
 	const saveAISettings = useMutation(
 		trpc.settings.saveAISettings.mutationOptions({
 			onError: (error) => {
-				toast.error(error.message || 'Failed to save API Key!');
+				toast.error(error.message || 'Failed to save API Key');
 			},
 			onSuccess: async () => {
 				await queryClient.invalidateQueries(trpc.settings.getAISettings.queryOptions());
 
-				toast.success('API Key saved successfully!');
+				toast.success('API Key saved successfully');
 			},
 		})
 	);
@@ -53,7 +53,7 @@ export const AISettingsForm = () => {
 	const removeAISettings = useMutation(
 		trpc.settings.removeAISettings.mutationOptions({
 			onError: (error) => {
-				toast.error(error.message || 'Failed to remove API Key!');
+				toast.error(error.message || 'Failed to remove API Key');
 			},
 			onSuccess: async () => {
 				await queryClient.invalidateQueries(trpc.settings.getAISettings.queryOptions());
@@ -62,7 +62,7 @@ export const AISettingsForm = () => {
 					apiKey: '',
 				});
 
-				toast.success('API Key removed successfully!');
+				toast.success('API Key removed successfully');
 			},
 		})
 	);
