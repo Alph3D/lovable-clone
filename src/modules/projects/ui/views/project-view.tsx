@@ -41,8 +41,7 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 					</Suspense>
 				</ResizablePanel>
 
-				{/* TODO: Fix handle not working when code tab is active, remove className and add withHandle */}
-				<ResizableHandle className='hover:bg-primary transition-colors' />
+				<ResizableHandle className='hover:bg-primary z-50 transition-colors' />
 
 				<ResizablePanel defaultSize={65} minSize={50}>
 					{!!activeFragment && (
