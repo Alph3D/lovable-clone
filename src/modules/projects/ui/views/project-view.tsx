@@ -3,7 +3,7 @@
 import { Suspense, useState } from 'react';
 import Link from 'next/link';
 
-import { UserButton } from '@clerk/nextjs';
+import { UserButton, useAuth } from '@clerk/nextjs';
 import { CodeIcon, CrownIcon, EyeIcon } from 'lucide-react';
 
 import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
@@ -21,8 +21,11 @@ interface ProjectViewProps {
 }
 
 export const ProjectView = ({ projectId }: ProjectViewProps) => {
+	const { has } = useAuth();
 	const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
 	const [tabState, setTabState] = useState<'preview' | 'code'>('preview');
+
+	const hasProAccess = has?.({ plan: 'pro' }) || false;
 
 	return (
 		<div className='h-screen'>
@@ -65,11 +68,13 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 								</TabsList>
 
 								<div className='ml-auto flex items-center gap-x-2'>
-									<Button size='sm' variant='tertiary' asChild>
-										<Link href='/pricing'>
-											<CrownIcon /> Upgrade
-										</Link>
-									</Button>
+									{!hasProAccess && (
+										<Button size='sm' variant='tertiary' asChild>
+											<Link href='/pricing'>
+												<CrownIcon /> Upgrade
+											</Link>
+										</Button>
+									)}
 
 									<UserButton />
 								</div>
