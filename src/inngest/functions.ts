@@ -8,13 +8,14 @@ import {
 	type Message,
 	type Tool,
 } from '@inngest/agent-kit';
+import { NonRetriableError } from 'inngest';
 import { z } from 'zod';
 
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from '@/config';
 import { SANDBOX_TIMEOUT } from '@/constants';
-import { env } from '@/env/server';
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { db } from '@/lib/db';
+import { decrypt } from '@/lib/encryption';
 import { generateTextFromMessage } from '@/lib/utils';
 
 import { inngest } from './client';
@@ -29,6 +30,31 @@ export const codeAgentFunction = inngest.createFunction(
 	{ id: 'code-agent' },
 	{ event: 'code-agent/run' },
 	async ({ event, step }) => {
+		const projectId = event.data.projectId as string;
+
+		const apiKey = await step.run('get-api-key', async () => {
+			const project = await db.project.findUnique({
+				select: {
+					userId: true,
+				},
+				where: {
+					id: projectId,
+				},
+			});
+
+			if (!project) throw new NonRetriableError('Project not found!');
+
+			const settings = await db.userSettings.findUnique({
+				where: {
+					userId: project.userId,
+				},
+			});
+
+			if (!settings) throw new NonRetriableError('AI settings not found!');
+
+			return decrypt(settings.apiKey);
+		});
+
 		const sandboxId = await step.run('get-sandbox-id', async () => {
 			const sandbox = await Sandbox.create('vibe-nextjs-test-9900');
 
@@ -45,7 +71,7 @@ export const codeAgentFunction = inngest.createFunction(
 				},
 				take: 5,
 				where: {
-					projectId: event.data.projectId,
+					projectId: projectId,
 				},
 			});
 
@@ -82,7 +108,7 @@ export const codeAgentFunction = inngest.createFunction(
 					return result;
 				},
 			},
-			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4.1' }),
+			model: openai({ apiKey, defaultParameters: { temperature: 0.1 }, model: 'gpt-4.1' }),
 			name: 'code-agent',
 			system: PROMPT,
 			tools: [
@@ -197,14 +223,14 @@ export const codeAgentFunction = inngest.createFunction(
 
 		const fragmentTitleGenerator = createAgent({
 			description: 'A fragment title generator',
-			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o-mini' }),
+			model: openai({ apiKey, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o-mini' }),
 			name: 'fragment-title-generator',
 			system: FRAGMENT_TITLE_PROMPT,
 		});
 
 		const responseGenerator = createAgent({
 			description: 'A response title generator',
-			model: openai({ apiKey: env.OPENAI_API_KEY, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o-mini' }),
+			model: openai({ apiKey, defaultParameters: { temperature: 0.1 }, model: 'gpt-4o-mini' }),
 			name: 'response-title-generator',
 			system: RESPONSE_PROMPT,
 		});
@@ -227,7 +253,7 @@ export const codeAgentFunction = inngest.createFunction(
 				return await db.message.create({
 					data: {
 						content: 'Something went wrong. Please try again.',
-						projectId: event.data.projectId,
+						projectId: projectId,
 						role: MessageRole.ASSISTANT,
 						type: MessageType.ERROR,
 					},
@@ -244,7 +270,7 @@ export const codeAgentFunction = inngest.createFunction(
 							title: generateTextFromMessage({ defaultText: 'Fragment', message: fragmentTitleOutput[0] }),
 						},
 					},
-					projectId: event.data.projectId,
+					projectId: projectId,
 					role: MessageRole.ASSISTANT,
 					type: MessageType.RESULT,
 				},

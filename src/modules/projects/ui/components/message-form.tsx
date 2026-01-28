@@ -12,6 +12,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { z } from 'zod';
 
 import { CreateMessageSchema } from '@/modules/messages/schemas/create-message-schema';
+import { useSettingsModal } from '@/modules/settings/hooks/use-settings-modal';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormField } from '@/components/ui/form';
@@ -25,6 +26,7 @@ interface MessageFormProps {
 }
 
 export const MessageForm = ({ projectId }: MessageFormProps) => {
+	const { onOpen: openSettingsModal } = useSettingsModal();
 	const trpc = useTRPC();
 	const router = useRouter();
 	const queryClient = useQueryClient();
@@ -42,6 +44,11 @@ export const MessageForm = ({ projectId }: MessageFormProps) => {
 	const createMessage = useMutation(
 		trpc.messages.create.mutationOptions({
 			onError: (error) => {
+				if (error.data?.code === 'PRECONDITION_FAILED') {
+					toast.error('API key not set!');
+					return openSettingsModal();
+				}
+
 				if (error.data?.code === 'TOO_MANY_REQUESTS') return router.push('/pricing');
 
 				toast.error(error.message || 'Failed to create message!');

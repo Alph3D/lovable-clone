@@ -8,10 +8,26 @@ import { consumeCredits } from '@/modules/usage/lib/usage';
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
 import { db } from '@/lib/db';
+import { decrypt } from '@/lib/encryption';
 import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
 
 export const projectsRouter = createTRPCRouter({
 	create: protectedProcedure.input(CreateProjectSchema).mutation(async ({ input, ctx }) => {
+		const { value } = input;
+		const { userId } = ctx.auth;
+
+		const settings = await db.userSettings.findUnique({
+			where: {
+				userId,
+			},
+		});
+
+		if (!settings) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+
+		const apiKey = decrypt(settings.apiKey);
+
+		if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+
 		try {
 			await consumeCredits();
 		} catch (error) {
@@ -21,9 +37,6 @@ export const projectsRouter = createTRPCRouter({
 				throw new TRPCError({ code: 'TOO_MANY_REQUESTS', message: "You've run out of credits!" });
 			}
 		}
-
-		const { value } = input;
-		const { userId } = ctx.auth;
 
 		const project = await db.project.create({
 			data: {

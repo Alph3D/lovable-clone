@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes';
 
 import { TRPCReactProvider } from '@/trpc/client';
 
+import { ModalProvider } from './modal-provider';
 import { ToasterProvider } from './toaster-provider';
 
 export const Providers = ({ children }: Readonly<PropsWithChildren>) => {
@@ -27,8 +28,8 @@ export const Providers = ({ children }: Readonly<PropsWithChildren>) => {
 				>
 					{children}
 
+					<ModalProvider />
 					<ToasterProvider />
-
 					<GoogleOneTap />
 				</ThemeProvider>
 			</TRPCReactProvider>

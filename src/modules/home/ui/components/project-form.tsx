@@ -16,6 +16,7 @@ import { z } from 'zod';
 
 import { PROJECT_TEMPLATES } from '@/modules/home/constants';
 import { CreateProjectSchema } from '@/modules/projects/schemas/create-project-schema';
+import { useSettingsModal } from '@/modules/settings/hooks/use-settings-modal';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormField } from '@/components/ui/form';
@@ -28,6 +29,7 @@ export const ProjectForm = () => {
 	const router = useRouter();
 	const { openSignUp } = useClerk();
 	const { resolvedTheme } = useTheme();
+	const { onOpen: openSettingsModal } = useSettingsModal();
 
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -62,7 +64,7 @@ export const ProjectForm = () => {
 	const createProject = useMutation(
 		trpc.projects.create.mutationOptions({
 			onError: (error) => {
-				if (error.data?.code === 'UNAUTHORIZED')
+				if (error.data?.code === 'UNAUTHORIZED') {
 					return openSignUp({
 						appearance: {
 							captcha: {
@@ -74,6 +76,12 @@ export const ProjectForm = () => {
 							theme: resolvedTheme === 'dark' ? dark : undefined,
 						},
 					});
+				}
+
+				if (error.data?.code === 'PRECONDITION_FAILED') {
+					toast.error('API key not set!');
+					return openSettingsModal();
+				}
 
 				if (error.data?.code === 'TOO_MANY_REQUESTS') return router.push('/pricing');
 

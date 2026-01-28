@@ -7,6 +7,7 @@ import { consumeCredits } from '@/modules/usage/lib/usage';
 import { MessageRole, MessageType } from '@/generated/prisma';
 import { inngest } from '@/inngest/client';
 import { db } from '@/lib/db';
+import { decrypt } from '@/lib/encryption';
 import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
 
 export const messagesRouter = createTRPCRouter({
@@ -28,6 +29,18 @@ export const messagesRouter = createTRPCRouter({
 			});
 
 			if (existingProjectCount === 0) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found!' });
+
+			const settings = await db.userSettings.findUnique({
+				where: {
+					userId,
+				},
+			});
+
+			if (!settings) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
+
+			const apiKey = decrypt(settings.apiKey);
+
+			if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found!' });
 
 			try {
 				await consumeCredits();

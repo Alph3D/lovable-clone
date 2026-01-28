@@ -1,11 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import { UserButton } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 import { SparklesIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
+
+import { useSettingsModal } from '@/modules/settings/hooks/use-settings-modal';
 
 interface UserControlProps {
 	showName?: boolean;
@@ -13,7 +13,7 @@ interface UserControlProps {
 
 export const UserControl = ({ showName = false }: UserControlProps) => {
 	const { resolvedTheme } = useTheme();
-	const router = useRouter();
+	const { onOpen } = useSettingsModal();
 
 	return (
 		<UserButton
@@ -42,7 +42,7 @@ export const UserControl = ({ showName = false }: UserControlProps) => {
 				<UserButton.Action
 					label='AI Settings'
 					labelIcon={<SparklesIcon className='size-4' strokeWidth={2.1} />}
-					onClick={() => router.push('/settings')}
+					onClick={onOpen}
 				/>
 			</UserButton.MenuItems>
 		</UserButton>
