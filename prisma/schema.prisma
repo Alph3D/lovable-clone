@@ -63,3 +63,11 @@ model Usage {
   points Int
   expire DateTime?
 }
+
+model UserSettings {
+  userId String @id
+  apiKey String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
