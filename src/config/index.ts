@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 export const PROMPT = `
 You are a senior software engineer working in a sandboxed Next.js 15.5.6 environment.
 
@@ -132,3 +134,66 @@ The title should be:
 
 Only return the raw title.
 `;
+
+export const SITE_CONFIG: Metadata = {
+	appleWebApp: {
+		title: 'Vibe',
+	},
+	applicationName: 'Vibe',
+	authors: {
+		name: 'Sanidhya Kumar Verma',
+		url: 'https://github.com/sanidhyy',
+	},
+	description:
+		'AI-powered application builder that lets you create apps and websites by chatting with AI. Build full-stack applications with live previews and code generation using Next.js 15.',
+	keywords: [
+		'reactjs',
+		'nextjs',
+		'nextjs-15',
+		'react-19',
+		'ai-app-builder',
+		'code-generation',
+		'clerk',
+		'clerk-auth',
+		'prisma',
+		'prisma-orm',
+		'trpc',
+		'openai',
+		'e2b',
+		'code-interpreter',
+		'inngest',
+		'agent-kit',
+		'shadcn-ui',
+		'radix-ui',
+		'tailwindcss',
+		'react-query',
+		'tanstack-query',
+		'zod',
+		'react-hook-form',
+		'react-hot-toast',
+		'lucide-react',
+		'typescript',
+		'javascript',
+		'postgresql',
+		'vercel',
+		'postcss',
+		'prettier',
+		'eslint',
+		'react',
+		'react-dom',
+		'date-fns',
+		'clsx',
+		'tailwind-merge',
+		'class-variance-authority',
+		'zustand',
+		'superjson',
+	] as Array<string>,
+	title: {
+		default: 'Vibe | Lovable Clone',
+		template: '%s | Vibe',
+	},
+} as const;
+
+export const LINKS = {
+	SOURCE_CODE: 'https://github.com/sanidhyy/lovable-clone',
+} as const;

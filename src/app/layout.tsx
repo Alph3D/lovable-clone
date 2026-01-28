@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
@@ -6,14 +6,16 @@ import { cn } from '@/lib/utils';
 import './globals.css';
 
 import { Providers } from '@/components/providers';
+import { SITE_CONFIG } from '@/config';
 
 const inter = Inter({
 	subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-	description: 'Lovable Clone',
-	title: 'Lovable Clone',
+export const metadata: Metadata = SITE_CONFIG;
+
+export const viewport: Viewport = {
+	themeColor: '#d97757',
 };
 
 const RootLayout = ({
