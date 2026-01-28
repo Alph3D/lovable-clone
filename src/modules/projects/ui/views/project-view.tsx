@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 
-import { UserButton, useAuth } from '@clerk/nextjs';
+import { useAuth } from '@clerk/nextjs';
 import { CodeIcon, CrownIcon, EyeIcon } from 'lucide-react';
 
 import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
@@ -11,9 +11,11 @@ import { MessagesContainer } from '@/modules/projects/ui/components/messages-con
 import { ProjectHeader } from '@/modules/projects/ui/components/project-header';
 
 import { FileExplorer } from '@/components/file-explorer';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { UserControl } from '@/components/user-control';
 import { SANDBOX_TIMEOUT } from '@/constants';
 import type { Fragment } from '@/generated/prisma';
 
@@ -128,7 +130,8 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 										</Button>
 									)}
 
-									<UserButton />
+									<UserControl />
+									<ThemeToggle />
 								</div>
 							</div>
 

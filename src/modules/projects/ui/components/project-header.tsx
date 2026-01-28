@@ -1,23 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { ChevronDownIcon, ChevronLeftIcon, SunMoonIcon } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { formatDistanceToNow } from 'date-fns';
+import { ChevronLeftIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuPortal,
-	DropdownMenuRadioGroup,
-	DropdownMenuRadioItem,
-	DropdownMenuSeparator,
-	DropdownMenuSub,
-	DropdownMenuSubContent,
-	DropdownMenuSubTrigger,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { useTRPC } from '@/trpc/client';
 
 interface ProjectHeaderProps {
@@ -26,59 +15,31 @@ interface ProjectHeaderProps {
 
 export const ProjectHeader = ({ projectId }: ProjectHeaderProps) => {
 	const trpc = useTRPC();
-	const { setTheme, theme } = useTheme();
 
 	const { data: project } = useSuspenseQuery(trpc.projects.getOne.queryOptions({ id: projectId }));
 
 	return (
-		<header className='flex items-center justify-between border-b p-2'>
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button
-						variant='ghost'
-						size='sm'
-						className='pl-2! transition-opacity hover:bg-transparent hover:opacity-75 focus-visible:ring-0'
-					>
-						<img src='/logo.svg' alt='Vibe logo' width={18} height={18} className='shrink-0' />
-						<span className='text-sm font-medium'>{project.name}</span>
-						<ChevronDownIcon />
-					</Button>
-				</DropdownMenuTrigger>
+		<header className='bg-sidebar/50 flex items-center justify-between border-b px-3 py-2.5 transition-colors'>
+			<div className='flex items-center gap-1'>
+				<Button variant='ghost' size='icon-sm' className='shrink-0 p-0' asChild>
+					<Link href='/' className='flex items-center justify-center'>
+						<ChevronLeftIcon className='size-5' strokeWidth={2.5} />
+						<span className='sr-only'>Back to Dashboard</span>
+					</Link>
+				</Button>
 
-				<DropdownMenuContent side='bottom' align='start'>
-					<DropdownMenuItem className='gap-0.5' asChild>
-						<Link href='/'>
-							<ChevronLeftIcon className='size-5' strokeWidth={2.1} />
-							<span>Back to Dashboard</span>
-						</Link>
-					</DropdownMenuItem>
-
-					<DropdownMenuSeparator />
-
-					<DropdownMenuSub>
-						<DropdownMenuSubTrigger className='gap-1.5'>
-							<SunMoonIcon className='text-muted-foreground size-5' strokeWidth={2.1} />
-							<span>Appearance</span>
-						</DropdownMenuSubTrigger>
-
-						<DropdownMenuPortal>
-							<DropdownMenuSubContent>
-								<DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
-									<DropdownMenuRadioItem value='light'>
-										<span>Light</span>
-									</DropdownMenuRadioItem>
-									<DropdownMenuRadioItem value='dark'>
-										<span>Dark</span>
-									</DropdownMenuRadioItem>
-									<DropdownMenuRadioItem value='system'>
-										<span>System</span>
-									</DropdownMenuRadioItem>
-								</DropdownMenuRadioGroup>
-							</DropdownMenuSubContent>
-						</DropdownMenuPortal>
-					</DropdownMenuSub>
-				</DropdownMenuContent>
-			</DropdownMenu>
+				<div className='flex items-center gap-2.5'>
+					<div className='bg-background flex size-8 shrink-0 items-center justify-center rounded-md border'>
+						<img src='/logo.svg' alt='Vibe logo' width={16} height={16} className='shrink-0' />
+					</div>
+					<div className='flex min-w-0 flex-col'>
+						<span className='truncate text-sm leading-tight font-semibold'>{project.name}</span>
+						<span className='text-muted-foreground text-xs leading-tight'>
+							{formatDistanceToNow(project.createdAt, { addSuffix: true })}
+						</span>
+					</div>
+				</div>
+			</div>
 		</header>
 	);
 };

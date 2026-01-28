@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { ClerkLoaded, ClerkLoading, SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserControl } from '@/components/user-control';
@@ -34,25 +35,27 @@ export const Navbar = () => {
 				</ClerkLoading>
 
 				<ClerkLoaded>
-					<SignedOut>
-						<div className='flex gap-2'>
-							<SignUpButton>
-								<Button variant='outline' size='sm'>
-									Sign up
-								</Button>
-							</SignUpButton>
+					<div className='flex items-center gap-2'>
+						<SignedOut>
+							<div className='flex gap-2'>
+								<SignUpButton>
+									<Button variant='outline' size='sm'>
+										Sign up
+									</Button>
+								</SignUpButton>
 
-							<SignInButton>
-								<Button size='sm'>Sign in</Button>
-							</SignInButton>
-						</div>
-					</SignedOut>
+								<SignInButton>
+									<Button size='sm'>Sign in</Button>
+								</SignInButton>
+							</div>
+						</SignedOut>
 
-					<SignedIn>
-						<UserControl showName />
-					</SignedIn>
+						<SignedIn>
+							<UserControl showName />
+						</SignedIn>
 
-					{/* TODO: Add dark and light theme toggle here  */}
+						<ThemeToggle />
+					</div>
 				</ClerkLoaded>
 			</div>
 		</nav>

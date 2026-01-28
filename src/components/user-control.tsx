@@ -1,7 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { UserButton } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
+import { SparklesIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 interface UserControlProps {
@@ -10,6 +13,7 @@ interface UserControlProps {
 
 export const UserControl = ({ showName = false }: UserControlProps) => {
 	const { resolvedTheme } = useTheme();
+	const router = useRouter();
 
 	return (
 		<UserButton
@@ -33,6 +37,14 @@ export const UserControl = ({ showName = false }: UserControlProps) => {
 					theme: resolvedTheme === 'dark' ? dark : undefined,
 				},
 			}}
-		/>
+		>
+			<UserButton.MenuItems>
+				<UserButton.Action
+					label='AI Settings'
+					labelIcon={<SparklesIcon className='size-4' strokeWidth={2.1} />}
+					onClick={() => router.push('/settings')}
+				/>
+			</UserButton.MenuItems>
+		</UserButton>
 	);
 };
