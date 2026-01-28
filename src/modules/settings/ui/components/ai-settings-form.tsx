@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { EyeIcon, EyeOffIcon, Trash2Icon } from 'lucide-react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { EyeIcon, EyeOffIcon, Loader2Icon, Trash2Icon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
@@ -28,11 +28,11 @@ export const AISettingsForm = () => {
 		title: 'Remove API Key',
 	});
 
-	const { data: aiSettings } = useSuspenseQuery(trpc.settings.getAISettings.queryOptions());
+	const { data: aiSettings, isLoading } = useQuery(trpc.settings.getAISettings.queryOptions());
 
 	const form = useForm<z.infer<typeof AISettingsSchema>>({
 		defaultValues: {
-			apiKey: aiSettings.apiKey,
+			apiKey: aiSettings?.apiKey || '',
 		},
 		resolver: zodResolver(AISettingsSchema),
 	});
@@ -79,6 +79,19 @@ export const AISettingsForm = () => {
 	};
 
 	const isPending = saveAISettings.isPending || removeAISettings.isPending;
+
+	useEffect(() => {
+		if (aiSettings) form.setValue('apiKey', aiSettings.apiKey);
+	}, [aiSettings, form]);
+
+	if (isLoading) {
+		return (
+			<div className='flex items-center justify-center py-8'>
+				<Loader2Icon className='size-5 animate-spin' />
+				<span className='sr-only'>Loading...</span>
+			</div>
+		);
+	}
 
 	return (
 		<>
@@ -143,7 +156,7 @@ export const AISettingsForm = () => {
 					/>
 
 					<div className='flex justify-end gap-2'>
-						{!!aiSettings.apiKey.trim() && (
+						{!!aiSettings?.apiKey.trim() && (
 							<Button
 								variant='destructive'
 								type='button'

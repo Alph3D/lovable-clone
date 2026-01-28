@@ -103,6 +103,7 @@ export const ProjectHeader = ({ projectId }: ProjectHeaderProps) => {
 							e.preventDefault();
 							e.stopPropagation();
 						}}
+						aria-label='More options'
 					>
 						{isDeleting ? <Loader2Icon className='size-4 animate-spin' /> : <EllipsisVerticalIcon className='size-4' />}
 					</Button>
