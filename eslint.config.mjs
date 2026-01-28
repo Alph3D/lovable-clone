@@ -39,6 +39,7 @@ const eslintConfig = [
 					endOfLine: 'auto',
 				},
 			],
+			'react-hooks/set-state-in-effect': 'off',
 			'sort-keys': 'warn',
 			'sort-vars': 'warn',
 			'tailwindcss/classnames-order': 'off',
