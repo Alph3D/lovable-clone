@@ -69,7 +69,7 @@ export const projectsRouter = createTRPCRouter({
 
 		const projects = await db.project.findMany({
 			orderBy: {
-				updatedAt: 'desc',
+				createdAt: 'desc',
 			},
 			where: {
 				userId,
@@ -96,6 +96,41 @@ export const projectsRouter = createTRPCRouter({
 			});
 
 			if (!project) throw new TRPCError({ code: 'NOT_FOUND', message: 'Project not found!' });
+
+			return project;
+		}),
+	remove: protectedProcedure
+		.input(z.object({ id: z.uuid().trim().min(1, 'ID is required!') }))
+		.mutation(async ({ input, ctx }) => {
+			const { id: projectId } = input;
+			const { userId } = ctx.auth;
+
+			const project = await db.project.delete({
+				where: {
+					id: projectId,
+					userId,
+				},
+			});
+
+			return project;
+		}),
+	update: protectedProcedure
+		.input(
+			z.object({ id: z.uuid().trim().min(1, 'ID is required!'), name: z.string().trim().min(1, 'Name is required!') })
+		)
+		.mutation(async ({ input, ctx }) => {
+			const { id: projectId, name } = input;
+			const { userId } = ctx.auth;
+
+			const project = await db.project.update({
+				data: {
+					name,
+				},
+				where: {
+					id: projectId,
+					userId,
+				},
+			});
 
 			return project;
 		}),

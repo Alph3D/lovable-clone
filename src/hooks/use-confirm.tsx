@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type JSX } from 'react';
+import { useCallback, useRef, useState, type JSX } from 'react';
 
 import { ResponsiveDialog } from '@/components/responsive-dialog';
 import { Button, type ButtonProps } from '@/components/ui/button';
@@ -17,37 +17,50 @@ export const useConfirm = ({
 	variant = 'destructive',
 }: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [resolver, setResolver] = useState<(value: boolean) => void>();
+	const resolverRef = useRef<((value: boolean) => void) | undefined>(undefined);
 
-	const confirm = () => {
+	const confirm = useCallback(() => {
 		setIsOpen(true);
-		return new Promise((resolve) => {
-			setResolver(() => resolve);
+		return new Promise<boolean>((resolve) => {
+			resolverRef.current = resolve;
 		});
-	};
+	}, []);
 
-	const handleClose = () => {
+	const handleClose = useCallback(() => {
 		setIsOpen(false);
-		resolver?.(false);
-	};
+		resolverRef.current?.(false);
+		resolverRef.current = undefined;
+	}, []);
 
-	const handleConfirm = () => {
+	const handleOpenChange = useCallback((open: boolean) => {
+		if (!open) {
+			setIsOpen(false);
+			resolverRef.current?.(false);
+			resolverRef.current = undefined;
+		}
+	}, []);
+
+	const handleConfirm = useCallback(() => {
 		setIsOpen(false);
-		resolver?.(true);
-	};
+		resolverRef.current?.(true);
+		resolverRef.current = undefined;
+	}, []);
 
-	const ConfirmationDialog = () => (
-		<ResponsiveDialog title={title} description={message} open={isOpen} onOpenChange={handleClose}>
-			<div className='flex w-full flex-col-reverse items-center justify-end gap-2 pt-4 lg:flex-row'>
-				<Button onClick={handleClose} variant='outline' className='w-full lg:w-auto'>
-					Cancel
-				</Button>
+	const ConfirmationDialog = useCallback(
+		() => (
+			<ResponsiveDialog title={title} description={message} open={isOpen} onOpenChange={handleOpenChange}>
+				<div className='flex w-full flex-col-reverse items-center justify-end gap-2 pt-4 lg:flex-row'>
+					<Button onClick={handleClose} variant='outline' className='w-full lg:w-auto'>
+						Cancel
+					</Button>
 
-				<Button onClick={handleConfirm} variant={variant} className='w-full lg:w-auto'>
-					Confirm
-				</Button>
-			</div>
-		</ResponsiveDialog>
+					<Button onClick={handleConfirm} variant={variant} className='w-full lg:w-auto'>
+						Confirm
+					</Button>
+				</div>
+			</ResponsiveDialog>
+		),
+		[title, message, variant, isOpen, handleOpenChange, handleClose, handleConfirm]
 	);
 
 	return [ConfirmationDialog, confirm];
