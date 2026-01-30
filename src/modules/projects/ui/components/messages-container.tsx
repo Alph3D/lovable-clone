@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { MessageRole, type Fragment } from '@/generated/prisma';
+import { MessageRole, type Fragment } from '@/generated/prisma/browser';
 import { useTRPC } from '@/trpc/client';
 
 import { MessageCard } from './message-card';

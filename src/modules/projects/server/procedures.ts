@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { CreateProjectSchema } from '@/modules/projects/schemas/create-project-schema';
 import { consumeCredits } from '@/modules/usage/lib/usage';
 
-import { MessageRole, MessageType } from '@/generated/prisma';
+import { MessageRole, MessageType } from '@/generated/prisma/client';
 import { inngest } from '@/inngest/client';
 import { db } from '@/lib/db';
 import { decrypt } from '@/lib/encryption';

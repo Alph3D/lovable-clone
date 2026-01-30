@@ -13,7 +13,7 @@ import { z } from 'zod';
 
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from '@/config';
 import { SANDBOX_TIMEOUT } from '@/constants';
-import { MessageRole, MessageType } from '@/generated/prisma';
+import { MessageRole, MessageType } from '@/generated/prisma/client';
 import { db } from '@/lib/db';
 import { decrypt } from '@/lib/encryption';
 import { generateTextFromMessage } from '@/lib/utils';

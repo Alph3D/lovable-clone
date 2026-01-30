@@ -19,7 +19,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserControl } from '@/components/user-control';
 import { SANDBOX_TIMEOUT } from '@/constants';
-import type { Fragment } from '@/generated/prisma';
+import type { Fragment } from '@/generated/prisma/browser';
 import type { ErrorFallbackProps } from '@/types';
 
 interface ProjectViewProps {

@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { CreateMessageSchema } from '@/modules/messages/schemas/create-message-schema';
 import { consumeCredits } from '@/modules/usage/lib/usage';
 
-import { MessageRole, MessageType } from '@/generated/prisma';
+import { MessageRole, MessageType } from '@/generated/prisma/client';
 import { inngest } from '@/inngest/client';
 import { db } from '@/lib/db';
 import { decrypt } from '@/lib/encryption';

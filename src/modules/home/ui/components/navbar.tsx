@@ -9,11 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserControl } from '@/components/user-control';
 import { LINKS } from '@/config';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 
 export const Navbar = () => {
 	const isScrolled = useScroll();
+	const isMobile = useIsMobile();
 
 	return (
 		<nav
@@ -39,11 +41,13 @@ export const Navbar = () => {
 					<div className='flex items-center gap-2'>
 						<SignedOut>
 							<div className='flex gap-2'>
-								<SignUpButton>
-									<Button variant='outline' size='sm'>
-										Sign up
-									</Button>
-								</SignUpButton>
+								<div className='hidden sm:inline-block'>
+									<SignUpButton>
+										<Button variant='outline' size='sm'>
+											Sign up
+										</Button>
+									</SignUpButton>
+								</div>
 
 								<SignInButton>
 									<Button size='sm'>Sign in</Button>
@@ -52,7 +56,7 @@ export const Navbar = () => {
 						</SignedOut>
 
 						<SignedIn>
-							<UserControl showName />
+							<UserControl showName={!isMobile} />
 						</SignedIn>
 
 						<ThemeToggle />

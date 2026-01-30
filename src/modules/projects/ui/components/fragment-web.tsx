@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { Hint } from '@/components/hint';
 import { Button } from '@/components/ui/button';
 import { SANDBOX_TIMEOUT } from '@/constants';
-import type { Fragment } from '@/generated/prisma';
+import type { Fragment } from '@/generated/prisma/browser';
 import { cn } from '@/lib/utils';
 
 interface FragmentWebProps {

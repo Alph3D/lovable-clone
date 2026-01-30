@@ -2,7 +2,7 @@ import { formatDate } from 'date-fns';
 import { ChevronRightIcon, Code2Icon } from 'lucide-react';
 
 import { Card } from '@/components/ui/card';
-import { MessageRole, MessageType, type Fragment } from '@/generated/prisma';
+import { MessageRole, MessageType, type Fragment } from '@/generated/prisma/browser';
 import { cn } from '@/lib/utils';
 
 interface FragmentCardProps {
@@ -81,7 +81,7 @@ interface UserMessageProps {
 const UserMessage = ({ content }: UserMessageProps) => {
 	return (
 		<div className='flex justify-end pr-2 pb-4 pl-10'>
-			<Card className='bg-muted max-w-[80%] rounded-lg border-none p-3 break-words shadow-none'>{content}</Card>
+			<Card className='bg-muted max-w-[80%] rounded-lg border-none p-3 wrap-break-word shadow-none'>{content}</Card>
 		</div>
 	);
 };
