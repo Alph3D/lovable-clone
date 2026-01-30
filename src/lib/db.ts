@@ -1,10 +1,15 @@
 import { PrismaPg } from '@prisma/adapter-pg';
+import { attachDatabasePool } from '@vercel/functions';
+import { Pool } from 'pg';
 
 import { env } from '@/env/server';
 import { PrismaClient } from '@/generated/prisma/client';
 
-const pool = new PrismaPg({ connectionString: env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter: pool });
+const pool = new Pool({ connectionString: env.DATABASE_URL });
+
+attachDatabasePool(pool);
+
+const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
 const globalForPrisma = global as unknown as { prisma: typeof prisma };
 
