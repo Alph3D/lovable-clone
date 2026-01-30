@@ -8,6 +8,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserControl } from '@/components/user-control';
+import { LINKS } from '@/config';
 import { useScroll } from '@/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 
@@ -55,6 +56,16 @@ export const Navbar = () => {
 						</SignedIn>
 
 						<ThemeToggle />
+
+						<Link
+							href={LINKS.SOURCE_CODE}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='hover:opacity-75 dark:invert'
+						>
+							<img src='/github.svg' alt='GitHub' height={32} width={32} />
+							<span className='sr-only'>Source Code</span>
+						</Link>
 					</div>
 				</ClerkLoaded>
 			</div>
