@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import { useAuth } from '@clerk/nextjs';
@@ -10,7 +10,9 @@ import { FragmentWeb } from '@/modules/projects/ui/components/fragment-web';
 import { MessagesContainer } from '@/modules/projects/ui/components/messages-container';
 import { ProjectHeader } from '@/modules/projects/ui/components/project-header';
 
+import { ErrorState } from '@/components/error-state';
 import { FileExplorer } from '@/components/file-explorer';
+import { LoadingState } from '@/components/loading-state';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
@@ -18,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserControl } from '@/components/user-control';
 import { SANDBOX_TIMEOUT } from '@/constants';
 import type { Fragment } from '@/generated/prisma';
+import type { ErrorFallbackProps } from '@/types';
 
 interface ProjectViewProps {
 	projectId: string;
@@ -73,17 +76,13 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 		<div className='h-screen'>
 			<ResizablePanelGroup direction='horizontal'>
 				<ResizablePanel defaultSize={35} minSize={20} className='flex min-h-0 flex-col'>
-					<Suspense fallback={<p>Loading project...</p>}>
-						<ProjectHeader projectId={projectId} />
-					</Suspense>
+					<ProjectHeader projectId={projectId} />
 
-					<Suspense fallback={<p>Loading messages...</p>}>
-						<MessagesContainer
-							projectId={projectId}
-							activeFragment={activeFragment}
-							setActiveFragment={setActiveFragment}
-						/>
-					</Suspense>
+					<MessagesContainer
+						projectId={projectId}
+						activeFragment={activeFragment}
+						setActiveFragment={setActiveFragment}
+					/>
 				</ResizablePanel>
 
 				<ResizableHandle className='hover:bg-primary z-50 transition-colors' />
@@ -146,6 +145,26 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 					)}
 				</ResizablePanel>
 			</ResizablePanelGroup>
+		</div>
+	);
+};
+
+export const ProjectViewLoading = () => {
+	return (
+		<div className='flex h-screen flex-1 items-center justify-center'>
+			<LoadingState title='Loading project' description='This may take a few seconds.' />
+		</div>
+	);
+};
+
+export const ProjectViewError = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
+	return (
+		<div className='flex h-screen flex-1 items-center justify-center'>
+			<ErrorState
+				title='Failed to load project'
+				description={error?.message || 'Something went wrong.'}
+				onRetry={resetErrorBoundary}
+			/>
 		</div>
 	);
 };

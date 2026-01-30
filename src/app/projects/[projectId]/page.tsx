@@ -6,7 +6,7 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { TRPCError } from '@trpc/server';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { ProjectView } from '@/modules/projects/ui/views/project-view';
+import { ProjectView, ProjectViewError, ProjectViewLoading } from '@/modules/projects/ui/views/project-view';
 
 import { appRouter } from '@/trpc/routers/_app';
 import { getQueryClient, trpc } from '@/trpc/server';
@@ -55,8 +55,8 @@ const ProjectIdPage = async ({ params }: ProjectIdPageProps) => {
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
-			<ErrorBoundary fallback={<p>Error</p>}>
-				<Suspense fallback={<p>Loading...</p>}>
+			<ErrorBoundary FallbackComponent={ProjectViewError}>
+				<Suspense fallback={<ProjectViewLoading />}>
 					<ProjectView projectId={projectId} />
 				</Suspense>
 			</ErrorBoundary>
