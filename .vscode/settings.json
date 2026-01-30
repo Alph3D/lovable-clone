@@ -15,5 +15,5 @@
 	// specify typescript version
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"prisma.pinToPrisma6": true
+	"prisma.pinToPrisma6": false
 }
