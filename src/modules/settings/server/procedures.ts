@@ -1,6 +1,6 @@
 import { TRPCError } from '@trpc/server';
-import OpenAI, { OpenAIError } from 'openai';
 
+import { verifyAISettings } from '@/modules/settings/actions';
 import { AISettingsSchema } from '@/modules/settings/schemas/ai-settings-schema';
 
 import { db } from '@/lib/db';
@@ -40,25 +40,9 @@ export const settingsRouter = createTRPCRouter({
 		const { userId } = ctx.auth;
 		const { apiKey } = input;
 
-		const openai = new OpenAI({
-			apiKey,
-		});
+		const { error, success } = await verifyAISettings(apiKey);
 
-		try {
-			await openai.models.list();
-		} catch (error) {
-			console.error(error);
-			throw new TRPCError({
-				cause: error instanceof Error ? error.cause : undefined,
-				code: 'BAD_REQUEST',
-				message:
-					error instanceof OpenAIError
-						? 'Invalid API Key'
-						: error instanceof Error
-							? error.message
-							: 'Failed to verify API key',
-			});
-		}
+		if (!success) throw new TRPCError({ code: 'BAD_REQUEST', message: error || 'Failed to verify API key' });
 
 		const encryptedApiKey = encrypt(apiKey);
 

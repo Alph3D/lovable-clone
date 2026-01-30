@@ -79,7 +79,7 @@ export const ProjectForm = () => {
 				}
 
 				if (error.data?.code === 'PRECONDITION_FAILED') {
-					toast.error('API key not set');
+					toast.error(error.message || 'Failed to verify API key');
 					return openSettingsModal();
 				}
 

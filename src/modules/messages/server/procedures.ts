@@ -2,6 +2,7 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { CreateMessageSchema } from '@/modules/messages/schemas/create-message-schema';
+import { verifyAISettings } from '@/modules/settings/actions';
 import { consumeCredits } from '@/modules/usage/lib/usage';
 
 import { MessageRole, MessageType } from '@/generated/prisma/client';
@@ -41,6 +42,10 @@ export const messagesRouter = createTRPCRouter({
 			const apiKey = decrypt(settings.apiKey);
 
 			if (!apiKey) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'API key not found' });
+
+			const { error, success } = await verifyAISettings(apiKey);
+
+			if (!success) throw new TRPCError({ code: 'BAD_REQUEST', message: error || 'Failed to verify API key' });
 
 			try {
 				await consumeCredits();
