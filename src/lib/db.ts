@@ -9,10 +9,9 @@ const pool = new Pool({ connectionString: env.DATABASE_URL });
 
 attachDatabasePool(pool);
 
-const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
+const globalForPrisma = global as unknown as { prisma: PrismaClient | undefined };
 
-const globalForPrisma = global as unknown as { prisma: typeof prisma };
-
+const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter: new PrismaPg(pool) });
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
-export const db = globalForPrisma.prisma;
+export const db = prisma;
