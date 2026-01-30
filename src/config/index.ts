@@ -145,11 +145,11 @@ export const SITE_CONFIG: Metadata = {
 		url: 'https://github.com/sanidhyy',
 	},
 	description:
-		'AI-powered application builder that lets you create apps and websites by chatting with AI. Build full-stack applications with live previews and code generation using Next.js 15.',
+		'AI-powered application builder that lets you create apps and websites by chatting with AI. Build full-stack applications with live previews and code generation using Next.js 16.',
 	keywords: [
 		'reactjs',
 		'nextjs',
-		'nextjs-15',
+		'nextjs-16',
 		'react-19',
 		'ai-app-builder',
 		'code-generation',
