@@ -74,7 +74,7 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
 
 	return (
 		<div className='h-screen'>
-			<ResizablePanelGroup direction='horizontal'>
+			<ResizablePanelGroup orientation='horizontal'>
 				<ResizablePanel defaultSize={35} minSize={20} className='flex min-h-0 flex-col'>
 					<ProjectHeader projectId={projectId} />
 
