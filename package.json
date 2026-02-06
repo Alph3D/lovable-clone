@@ -80,7 +80,7 @@
 		"@types/node": "^25.1.0",
 		"@types/pg": "^8.16.0",
 		"@types/prismjs": "^1.26.5",
-		"@types/react": "^19.2.10",
+		"@types/react": "^19.2.13",
 		"@types/react-dom": "^19.2.3",
 		"eslint": "^9.39.2",
 		"eslint-config-next": "16.1.6",
