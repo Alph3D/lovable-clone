@@ -80,7 +80,7 @@ lovable-clone/
   |- postcss.config.mjs
   |- prisma.config.ts
   |- tsconfig.json
-  |- vercel.json
+  |- vercel.ts
 ```
 <!--- FOLDER_STRUCTURE_END --->
 
@@ -250,6 +250,7 @@ Useful resources and dependencies that are used in Vibe.
 - [@types/prismjs](https://www.npmjs.com/package/@types/prismjs): ^1.26.5
 - [@types/react](https://www.npmjs.com/package/@types/react): ^19.2.13
 - [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): ^19.2.3
+- [@vercel/config](https://www.npmjs.com/package/@vercel/config): ^0.0.33
 - [@vercel/functions](https://www.npmjs.com/package/@vercel/functions): ^3.4.2
 - [class-variance-authority](https://www.npmjs.com/package/class-variance-authority): ^0.7.1
 - [client-only](https://www.npmjs.com/package/client-only): ^0.0.1
