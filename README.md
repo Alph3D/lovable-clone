@@ -50,88 +50,23 @@ lovable-clone/
     |-- migrations/
     |-- schema.prisma
   |- public/
-    |-- github.svg
-    |-- logo.svg
-    |-- web-app-manifest-192x192.png
-    |-- web-app-manifest-512x512.png
   |- sandbox-templates/
+    |-- nextjs/
   |- src/
     |-- app/
-        |--- (home)/
-          |---- pricing/
-          |---- sign-in/
-          |---- sign-up/
-          |---- layout.tsx
-          |---- page.tsx
-        |--- api/
-          |---- cron/
-          |---- inngest/
-          |---- trpc/
-        |--- projects/
-          |---- [projectId]/
-        |--- apple-icon.png
-        |--- favicon.ico
-        |--- global-error.tsx
-        |--- globals.css
-        |--- icon0.svg
-        |--- icon1.png
-        |--- layout.tsx
-        |--- manifest.json
-        |--- not-found.tsx
     |-- components/
-        |--- code-view/
-        |--- providers/
-        |--- ui/
-        |--- error-state.tsx
-        |--- file-explorer.tsx
-        |--- hint.tsx
-        |--- loading-state.tsx
-        |--- responsive-dialog.tsx
-        |--- theme-toggle.tsx
-        |--- tree-view.tsx
-        |--- user-control.tsx
     |-- config/
-        |--- http-status-codes.ts
-        |--- index.ts
     |-- constants/
-        |--- index.ts
-    |-- db/
-        |--- index.ts
-        |--- schema.ts
     |-- env/
-        |--- client.ts
-        |--- server.ts
-    |-- generated/
     |-- hooks/
-        |--- use-confirm.tsx
-        |--- use-mobile.ts
-        |--- use-scroll.ts
     |-- inngest/
-        |--- client.ts
-        |--- functions.ts
-        |--- utils.ts
     |-- lib/
-        |--- db.ts
-        |--- encryption.ts
-        |--- utils.ts
-    |-- modules
-        |--- auth/
-        |--- home/
-        |--- messages/
-        |--- pricing/
-        |--- settings/
-        |--- usage/
+    |-- modules/
     |-- trpc/
-        |--- routers/
-        |--- client.tsx
-        |--- init.ts
-        |--- query-client.ts
-        |--- server.tsx
     |-- types/
-        |--- index.ts
     |-- proxy.ts
   |- .env.example
-  |- .env.local
+  |- .env/.env.local
   |- .gitignore
   |- .prettierignore
   |- .prettierrc.mjs
@@ -144,7 +79,6 @@ lovable-clone/
   |- pnpm-workspace.yaml
   |- postcss.config.mjs
   |- prisma.config.ts
-  |- README.md
   |- tsconfig.json
   |- vercel.json
 ```
@@ -286,12 +220,16 @@ Useful resources and dependencies that are used in Vibe.
 
 - Thanks to CodeWithAntonio: https://codewithantonio.com/
 <!--- DEPENDENCIES_START --->
-- [@clerk/nextjs](https://www.npmjs.com/package/@clerk/nextjs): ^6.37.1
+- [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser): ^7.28.6
+- [@clerk/nextjs](https://www.npmjs.com/package/@clerk/nextjs): ^6.37.3
 - [@clerk/themes](https://www.npmjs.com/package/@clerk/themes): ^2.4.51
 - [@e2b/code-interpreter](https://www.npmjs.com/package/@e2b/code-interpreter): ^2.3.3
+- [@eslint/eslintrc](https://www.npmjs.com/package/@eslint/eslintrc): ^3.3.3
 - [@hookform/resolvers](https://www.npmjs.com/package/@hookform/resolvers): ^5.2.2
+- [@ianvs/prettier-plugin-sort-imports](https://www.npmjs.com/package/@ianvs/prettier-plugin-sort-imports): ^4.7.0
 - [@inngest/agent-kit](https://www.npmjs.com/package/@inngest/agent-kit): ^0.13.2
-- [@prisma/adapter-pg](https://www.npmjs.com/package/@prisma/adapter-pg): ^7.3.0
+- [@next/eslint-plugin-next](https://www.npmjs.com/package/@next/eslint-plugin-next): ^16.1.6
+- [@prisma/adapter-pg](https://www.npmjs.com/package/@prisma/adapter-pg): ^7.4.0
 - [@prisma/client](https://www.npmjs.com/package/@prisma/client): ^7.3.0
 - [@radix-ui/react-collapsible](https://www.npmjs.com/package/@radix-ui/react-collapsible): ^1.1.12
 - [@radix-ui/react-dialog](https://www.npmjs.com/package/@radix-ui/react-dialog): ^1.1.15
@@ -302,22 +240,38 @@ Useful resources and dependencies that are used in Vibe.
 - [@radix-ui/react-tabs](https://www.npmjs.com/package/@radix-ui/react-tabs): ^1.1.13
 - [@radix-ui/react-tooltip](https://www.npmjs.com/package/@radix-ui/react-tooltip): ^1.2.8
 - [@t3-oss/env-nextjs](https://www.npmjs.com/package/@t3-oss/env-nextjs): ^0.13.10
+- [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss): ^4.1.18
 - [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query): ^5.90.20
+- [@trivago/prettier-plugin-sort-imports](https://www.npmjs.com/package/@trivago/prettier-plugin-sort-imports): ^6.0.2
 - [@trpc/client](https://www.npmjs.com/package/@trpc/client): ^11.9.0
 - [@trpc/server](https://www.npmjs.com/package/@trpc/server): ^11.9.0
 - [@trpc/tanstack-react-query](https://www.npmjs.com/package/@trpc/tanstack-react-query): ^11.9.0
-- [@vercel/functions](https://www.npmjs.com/package/@vercel/functions): ^3.4.0
+- [@types/node](https://www.npmjs.com/package/@types/node): ^25.2.3
+- [@types/pg](https://www.npmjs.com/package/@types/pg): ^8.16.0
+- [@types/prismjs](https://www.npmjs.com/package/@types/prismjs): ^1.26.5
+- [@types/react](https://www.npmjs.com/package/@types/react): ^19.2.13
+- [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): ^19.2.3
+- [@vercel/functions](https://www.npmjs.com/package/@vercel/functions): ^3.4.2
 - [class-variance-authority](https://www.npmjs.com/package/class-variance-authority): ^0.7.1
 - [client-only](https://www.npmjs.com/package/client-only): ^0.0.1
 - [clsx](https://www.npmjs.com/package/clsx): ^2.1.1
 - [date-fns](https://www.npmjs.com/package/date-fns): ^4.1.0
 - [dotenv](https://www.npmjs.com/package/dotenv): ^17.2.3
-- [inngest](https://www.npmjs.com/package/inngest): ^3.49.3
+- [eslint](https://www.npmjs.com/package/eslint): ^9.39.2
+- [eslint-config-next](https://www.npmjs.com/package/eslint-config-next): 16.1.6
+- [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier): ^10.1.8
+- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier): ^5.5.5
+- [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): ^7.0.1
+- [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss): 4.0.0-beta.0
+- [inngest](https://www.npmjs.com/package/inngest): ^3.52.0
 - [lucide-react](https://www.npmjs.com/package/lucide-react): ^0.563.0
 - [next](https://www.npmjs.com/package/next): 16.1.6
 - [next-themes](https://www.npmjs.com/package/next-themes): ^0.4.6
-- [openai](https://www.npmjs.com/package/openai): ^6.17.0
-- [pg](https://www.npmjs.com/package/pg): ^8.17.2
+- [openai](https://www.npmjs.com/package/openai): ^6.21.0
+- [pg](https://www.npmjs.com/package/pg): ^8.18.0
+- [prettier](https://www.npmjs.com/package/prettier): ^3.8.1
+- [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss): ^0.7.2
+- [prisma](https://www.npmjs.com/package/prisma): ^7.3.0
 - [prismjs](https://www.npmjs.com/package/prismjs): ^1.30.0
 - [random-word-slugs](https://www.npmjs.com/package/random-word-slugs): ^0.1.7
 - [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^9.0.1
@@ -326,38 +280,21 @@ Useful resources and dependencies that are used in Vibe.
 - [react-error-boundary](https://www.npmjs.com/package/react-error-boundary): ^6.1.0
 - [react-hook-form](https://www.npmjs.com/package/react-hook-form): ^7.71.1
 - [react-hot-toast](https://www.npmjs.com/package/react-hot-toast): ^2.6.0
-- [react-resizable-panels](https://www.npmjs.com/package/react-resizable-panels): ^4.5.6
+- [react-resizable-panels](https://www.npmjs.com/package/react-resizable-panels): ^4.6.0
 - [react-textarea-autosize](https://www.npmjs.com/package/react-textarea-autosize): ^8.5.9
 - [server-only](https://www.npmjs.com/package/server-only): ^0.0.1
+- [sort-classes](https://www.npmjs.com/package/sort-classes): npm:prettier-plugin-tailwindcss@^0.7.2
 - [superjson](https://www.npmjs.com/package/superjson): ^2.2.6
 - [tailwind-merge](https://www.npmjs.com/package/tailwind-merge): ^3.4.0
+- [tailwind-scrollbar](https://www.npmjs.com/package/tailwind-scrollbar): ^4.0.2
+- [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^4.1.18
+- [tidy-imports](https://www.npmjs.com/package/tidy-imports): npm:@trivago/prettier-plugin-sort-imports@^6.0.2
+- [tw-animate-css](https://www.npmjs.com/package/tw-animate-css): ^1.4.0
+- [typescript](https://www.npmjs.com/package/typescript): ^5.9.3
 - [vaul](https://www.npmjs.com/package/vaul): ^1.1.2
 - [zod](https://www.npmjs.com/package/zod): ^4.3.6
 - [zustand](https://www.npmjs.com/package/zustand): ^5.0.10
-- [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser): ^7.28.6
-- [@eslint/eslintrc](https://www.npmjs.com/package/@eslint/eslintrc): ^3.3.3
-- [@ianvs/prettier-plugin-sort-imports](https://www.npmjs.com/package/@ianvs/prettier-plugin-sort-imports): ^4.7.0
-- [@next/eslint-plugin-next](https://www.npmjs.com/package/@next/eslint-plugin-next): 16.1.6
-- [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss): ^4.1.18
-- [@trivago/prettier-plugin-sort-imports](https://www.npmjs.com/package/@trivago/prettier-plugin-sort-imports): ^6.0.2
-- [@types/node](https://www.npmjs.com/package/@types/node): ^25.1.0
-- [@types/pg](https://www.npmjs.com/package/@types/pg): ^8.16.0
-- [@types/prismjs](https://www.npmjs.com/package/@types/prismjs): ^1.26.5
-- [@types/react](https://www.npmjs.com/package/@types/react): ^19.2.10
-- [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): ^19.2.3
-- [eslint](https://www.npmjs.com/package/eslint): ^9.39.2
-- [eslint-config-next](https://www.npmjs.com/package/eslint-config-next): 16.1.6
-- [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier): ^10.1.8
-- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier): ^5.5.5
-- [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): ^7.0.1
-- [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss): 4.0.0-beta.0
-- [prettier](https://www.npmjs.com/package/prettier): ^3.8.1
-- [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss): ^0.7.2
-- [prisma](https://www.npmjs.com/package/prisma): ^7.3.0
-- [tailwind-scrollbar](https://www.npmjs.com/package/tailwind-scrollbar): ^4.0.2
-- [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^4.1.18
-- [tw-animate-css](https://www.npmjs.com/package/tw-animate-css): ^1.4.0
-- [typescript](https://www.npmjs.com/package/typescript): ^5.9.3
+
 <!--- DEPENDENCIES_END --->
 
 ## :coffee: Buy Me a Coffee
