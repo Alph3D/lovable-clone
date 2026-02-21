@@ -43,6 +43,7 @@
 
 Here is the folder structure of this app.
 
+<!--- FOLDER_STRUCTURE_START --->
 ```bash
 lovable-clone/
   |- prisma/
@@ -147,6 +148,7 @@ lovable-clone/
   |- tsconfig.json
   |- vercel.json
 ```
+<!--- FOLDER_STRUCTURE_END --->
 
 <br />
 
@@ -283,6 +285,7 @@ You might encounter some bugs while using this app. You are more than welcome to
 Useful resources and dependencies that are used in Vibe.
 
 - Thanks to CodeWithAntonio: https://codewithantonio.com/
+<!--- DEPENDENCIES_START --->
 - [@clerk/nextjs](https://www.npmjs.com/package/@clerk/nextjs): ^6.37.1
 - [@clerk/themes](https://www.npmjs.com/package/@clerk/themes): ^2.4.51
 - [@e2b/code-interpreter](https://www.npmjs.com/package/@e2b/code-interpreter): ^2.3.3
@@ -355,6 +358,7 @@ Useful resources and dependencies that are used in Vibe.
 - [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^4.1.18
 - [tw-animate-css](https://www.npmjs.com/package/tw-animate-css): ^1.4.0
 - [typescript](https://www.npmjs.com/package/typescript): ^5.9.3
+<!--- DEPENDENCIES_END --->
 
 ## :coffee: Buy Me a Coffee
 
