@@ -44,7 +44,6 @@
 Here is the folder structure of this app.
 
 <!--- FOLDER_STRUCTURE_START --->
-
 ```bash
 lovable-clone/
   |- prisma/
@@ -83,7 +82,6 @@ lovable-clone/
   |- tsconfig.json
   |- vercel.json
 ```
-
 <!--- FOLDER_STRUCTURE_END --->
 
 <br />
@@ -244,7 +242,6 @@ Useful resources and dependencies that are used in Vibe.
 - [@t3-oss/env-nextjs](https://www.npmjs.com/package/@t3-oss/env-nextjs): ^0.13.10
 - [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss): ^4.1.18
 - [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query): ^5.90.20
-- [@trivago/prettier-plugin-sort-imports](https://www.npmjs.com/package/@trivago/prettier-plugin-sort-imports): ^6.0.2
 - [@trpc/client](https://www.npmjs.com/package/@trpc/client): ^11.9.0
 - [@trpc/server](https://www.npmjs.com/package/@trpc/server): ^11.9.0
 - [@trpc/tanstack-react-query](https://www.npmjs.com/package/@trpc/tanstack-react-query): ^11.9.0
@@ -285,12 +282,10 @@ Useful resources and dependencies that are used in Vibe.
 - [react-resizable-panels](https://www.npmjs.com/package/react-resizable-panels): ^4.6.0
 - [react-textarea-autosize](https://www.npmjs.com/package/react-textarea-autosize): ^8.5.9
 - [server-only](https://www.npmjs.com/package/server-only): ^0.0.1
-- [sort-classes](https://www.npmjs.com/package/sort-classes): npm:prettier-plugin-tailwindcss@^0.7.2
 - [superjson](https://www.npmjs.com/package/superjson): ^2.2.6
 - [tailwind-merge](https://www.npmjs.com/package/tailwind-merge): ^3.4.0
 - [tailwind-scrollbar](https://www.npmjs.com/package/tailwind-scrollbar): ^4.0.2
 - [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^4.1.18
-- [tidy-imports](https://www.npmjs.com/package/tidy-imports): npm:@trivago/prettier-plugin-sort-imports@^6.0.2
 - [tw-animate-css](https://www.npmjs.com/package/tw-animate-css): ^1.4.0
 - [typescript](https://www.npmjs.com/package/typescript): ^5.9.3
 - [vaul](https://www.npmjs.com/package/vaul): ^1.1.2
