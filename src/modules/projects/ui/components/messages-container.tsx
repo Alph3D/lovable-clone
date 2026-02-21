@@ -70,7 +70,7 @@ export const MessagesContainer = ({ activeFragment, projectId, setActiveFragment
 			</div>
 
 			<div className='relative p-3 pt-1'>
-				<div className='to-background/90 pointer-events-none absolute inset-x-0 -top-6 h-6 bg-gradient-to-b from-transparent' />
+				<div className='to-background/90 pointer-events-none absolute inset-x-0 -top-6 h-6 bg-linear-to-b from-transparent' />
 				<MessageForm projectId={projectId} />
 			</div>
 		</div>

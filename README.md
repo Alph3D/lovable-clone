@@ -44,6 +44,7 @@
 Here is the folder structure of this app.
 
 <!--- FOLDER_STRUCTURE_START --->
+
 ```bash
 lovable-clone/
   |- prisma/
@@ -82,6 +83,7 @@ lovable-clone/
   |- tsconfig.json
   |- vercel.json
 ```
+
 <!--- FOLDER_STRUCTURE_END --->
 
 <br />

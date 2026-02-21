@@ -101,7 +101,7 @@ export const FragmentWeb = ({ data }: FragmentWebProps) => {
 			</div>
 
 			{isExpired ? (
-				<div className='from-background to-muted/30 flex size-full items-center justify-center bg-gradient-to-b p-6'>
+				<div className='from-background to-muted/30 flex size-full items-center justify-center bg-linear-to-b p-6'>
 					<div className='bg-card w-full max-w-xl rounded-xl border p-6 shadow-sm'>
 						<div className='flex items-start gap-4'>
 							<div className='bg-muted text-muted-foreground flex size-12 shrink-0 items-center justify-center rounded-lg border'>
