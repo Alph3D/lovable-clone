@@ -54,16 +54,66 @@ lovable-clone/
     |-- nextjs/
   |- src/
     |-- app/
+      |--- (home)/
+      |--- api/
+      |--- projects/
+      |--- apple-icon.png
+      |--- favicon.ico
+      |--- global-error.tsx
+      |--- globals.css
+      |--- icon0.svg
+      |--- icon1.png
+      |--- layout.tsx
+      |--- manifest.json
+      |--- not-found.tsx
     |-- components/
+      |--- code-view/
+      |--- providers/
+      |--- ui/
+      |--- error-state.tsx
+      |--- file-explorer.tsx
+      |--- hint.tsx
+      |--- loading-state.tsx
+      |--- responsive-dialog.tsx
+      |--- theme-toggle.tsx
+      |--- tree-view.tsx
+      |--- user-control.tsx
     |-- config/
+      |--- http-status-codes.ts
+      |--- index.ts
     |-- constants/
+      |--- index.ts
     |-- env/
+      |--- client.ts
+      |--- server.ts
     |-- hooks/
+      |--- use-confirm.tsx
+      |--- use-mobile.ts
+      |--- use-scroll.ts
     |-- inngest/
+      |--- client.ts
+      |--- functions.ts
+      |--- utils.ts
     |-- lib/
+      |--- db.ts
+      |--- encryption.ts
+      |--- utils.ts
     |-- modules/
+      |--- auth/
+      |--- home/
+      |--- messages/
+      |--- pricing/
+      |--- projects/
+      |--- settings/
+      |--- usage/
     |-- trpc/
+      |--- routers/
+      |--- client.tsx
+      |--- init.ts
+      |--- query-client.ts
+      |--- server.tsx
     |-- types/
+      |--- index.ts
     |-- proxy.ts
   |- .env.example
   |- .env/.env.local
@@ -292,6 +342,7 @@ Useful resources and dependencies that are used in Vibe.
 - [vaul](https://www.npmjs.com/package/vaul): ^1.1.2
 - [zod](https://www.npmjs.com/package/zod): ^4.3.6
 - [zustand](https://www.npmjs.com/package/zustand): ^5.0.10
+
 <!--- DEPENDENCIES_END --->
 
 ## :coffee: Buy Me a Coffee
