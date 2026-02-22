@@ -21,6 +21,7 @@ export const env = createEnv({
 		CRON_SECRET: z.string().trim().min(1),
 		DATABASE_URL: z.url().trim(),
 		E2B_API_KEY: z.string().trim().min(1).startsWith('e2b_'),
+		E2B_SANDBOX_TEMPLATE_NAME: z.string().trim().min(1),
 		NODE_ENV: z.enum(['development', 'production', 'test']).default('development').optional(),
 		VERIFICATION_SECRET: z.string().trim().min(1),
 	},

@@ -12,7 +12,8 @@ import { NonRetriableError } from 'inngest';
 import { z } from 'zod';
 
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from '@/config';
-import { SANDBOX_TEMPLATE_NAME, SANDBOX_TIMEOUT } from '@/constants';
+import { SANDBOX_TIMEOUT } from '@/constants';
+import { env } from '@/env/server';
 import { MessageRole, MessageType } from '@/generated/prisma/client';
 import { db } from '@/lib/db';
 import { decrypt } from '@/lib/encryption';
@@ -56,7 +57,7 @@ export const codeAgentFunction = inngest.createFunction(
 		});
 
 		const sandboxId = await step.run('get-sandbox-id', async () => {
-			const sandbox = await Sandbox.create(SANDBOX_TEMPLATE_NAME);
+			const sandbox = await Sandbox.create(env.E2B_SANDBOX_TEMPLATE_NAME);
 
 			await sandbox.setTimeout(SANDBOX_TIMEOUT);
 			return sandbox.sandboxId;

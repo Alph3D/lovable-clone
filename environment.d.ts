@@ -10,8 +10,9 @@ declare global {
 			// neon db uri
 			DATABASE_URL: string;
 
-			// e2b api key
+			// e2b api key and sandbox template name
 			E2B_API_KEY: string;
+			E2B_SANDBOX_TEMPLATE_NAME: string;
 
 			// clerk api keys
 			NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string;
