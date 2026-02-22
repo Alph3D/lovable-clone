@@ -7,6 +7,7 @@ export const config: VercelConfig = {
 			schedule: '0 0 * * *',
 		},
 	],
-	ignoreCommand: "git diff HEAD^ HEAD --quiet . ':!*.md' ':!LICENSE' ':!.env.example' ':!.github' ':!.vscode'",
+	ignoreCommand:
+		"git diff HEAD^ HEAD --quiet . ':!*.md' ':!**/LICENSE' ':!**/.env.example' ':!**/.github' ':!**/.vscode'",
 	trailingSlash: false,
 };
