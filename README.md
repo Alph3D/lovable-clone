@@ -44,6 +44,7 @@
 Here is the folder structure of this app.
 
 <!--- FOLDER_STRUCTURE_START --->
+
 ```bash
 lovable-clone/
   |- prisma/
@@ -132,6 +133,7 @@ lovable-clone/
   |- tsconfig.json
   |- vercel.ts
 ```
+
 <!--- FOLDER_STRUCTURE_END --->
 
 <br />
@@ -222,9 +224,8 @@ NEXT_PUBLIC_APP_BASE_URL="http://localhost:3000"
 - Create a new key and copy the API key → `E2B_API_KEY`.
 - Open terminal and run `npm i -g @e2b/cli` to install the E2B CLI.
 - Login to E2B CLI using `e2b auth login`.
-- Change the working directory using `cd ./sandbox-templates/nextjs`
-- Run `e2b template build --name <template-name> --cmd "./compile_page.sh"` to create a new sandbox. Make sure the template name is unique and not already taken.
-- Also pass the template name to the `SANDBOX_TEMPLATE_NAME` constant in the `/src/constants/index.ts` file.
+- Assign a name to the template through environment variable `E2B_SANDBOX_TEMPLATE_NAME`. Make sure the template name is unique and not already taken.
+- Run `pnpm run e2b:build` to create a new sandbox.
 
 ### 10. Generate Secrets
 
