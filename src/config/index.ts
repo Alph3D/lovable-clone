@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const PROMPT = `
-You are a senior software engineer working in a sandboxed Next.js 15.5.6 environment.
+You are a senior software engineer working in a sandboxed Next.js 16.1.6 environment.
 
 Environment:
 - Writable file system via createOrUpdateFiles
