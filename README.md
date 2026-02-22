@@ -292,7 +292,6 @@ Useful resources and dependencies that are used in Vibe.
 - [vaul](https://www.npmjs.com/package/vaul): ^1.1.2
 - [zod](https://www.npmjs.com/package/zod): ^4.3.6
 - [zustand](https://www.npmjs.com/package/zustand): ^5.0.10
-
 <!--- DEPENDENCIES_END --->
 
 ## :coffee: Buy Me a Coffee
