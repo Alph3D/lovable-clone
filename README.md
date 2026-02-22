@@ -44,7 +44,6 @@
 Here is the folder structure of this app.
 
 <!--- FOLDER_STRUCTURE_START --->
-
 ```bash
 lovable-clone/
   |- prisma/
@@ -133,7 +132,6 @@ lovable-clone/
   |- tsconfig.json
   |- vercel.ts
 ```
-
 <!--- FOLDER_STRUCTURE_END --->
 
 <br />
@@ -308,6 +306,7 @@ Useful resources and dependencies that are used in Vibe.
 - [clsx](https://www.npmjs.com/package/clsx): ^2.1.1
 - [date-fns](https://www.npmjs.com/package/date-fns): ^4.1.0
 - [dotenv](https://www.npmjs.com/package/dotenv): ^17.2.3
+- [e2b](https://www.npmjs.com/package/e2b): ^2.12.1
 - [eslint](https://www.npmjs.com/package/eslint): ^9.39.2
 - [eslint-config-next](https://www.npmjs.com/package/eslint-config-next): 16.1.6
 - [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier): ^10.1.8
@@ -338,6 +337,7 @@ Useful resources and dependencies that are used in Vibe.
 - [tailwind-merge](https://www.npmjs.com/package/tailwind-merge): ^3.4.0
 - [tailwind-scrollbar](https://www.npmjs.com/package/tailwind-scrollbar): ^4.0.2
 - [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^4.1.18
+- [tsx](https://www.npmjs.com/package/tsx): ^4.21.0
 - [tw-animate-css](https://www.npmjs.com/package/tw-animate-css): ^1.4.0
 - [typescript](https://www.npmjs.com/package/typescript): ^5.9.3
 - [vaul](https://www.npmjs.com/package/vaul): ^1.1.2
