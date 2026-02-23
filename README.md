@@ -44,6 +44,7 @@
 Here is the folder structure of this app.
 
 <!--- FOLDER_STRUCTURE_START --->
+
 ```bash
 lovable-clone/
   |- prisma/
@@ -132,6 +133,7 @@ lovable-clone/
   |- tsconfig.json
   |- vercel.ts
 ```
+
 <!--- FOLDER_STRUCTURE_END --->
 
 <br />
@@ -154,8 +156,9 @@ NEXT_PUBLIC_APP_BASE_URL="http://localhost:3000"
 # neon db uri
 DATABASE_URL="postgresql://<username>:<password>@<hostname>/Vibe?sslmode=require&channel_binding=require"
 
-# e2b api key
+# e2b api key and sandbox template name
 E2B_API_KEY="e2b_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+E2B_SANDBOX_TEMPLATE_NAME="<org-name>/<template-name>"
 
 # clerk api keys
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
