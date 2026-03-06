@@ -315,7 +315,7 @@ Useful resources and dependencies that are used in Vibe.
 - [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): ^7.0.1
 - [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss): 4.0.0-beta.0
 - [inngest](https://www.npmjs.com/package/inngest): ^3.52.0
-- [lucide-react](https://www.npmjs.com/package/lucide-react): ^0.563.0
+- [lucide-react](https://www.npmjs.com/package/lucide-react): ^0.577.0
 - [next](https://www.npmjs.com/package/next): 16.1.6
 - [next-themes](https://www.npmjs.com/package/next-themes): ^0.4.6
 - [openai](https://www.npmjs.com/package/openai): ^6.25.0
@@ -328,7 +328,7 @@ Useful resources and dependencies that are used in Vibe.
 - [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^9.0.1
 - [react](https://www.npmjs.com/package/react): 19.2.4
 - [react-dom](https://www.npmjs.com/package/react-dom): 19.2.4
-- [react-error-boundary](https://www.npmjs.com/package/react-error-boundary): ^6.1.0
+- [react-error-boundary](https://www.npmjs.com/package/react-error-boundary): ^6.1.1
 - [react-hook-form](https://www.npmjs.com/package/react-hook-form): ^7.71.1
 - [react-hot-toast](https://www.npmjs.com/package/react-hot-toast): ^2.6.0
 - [react-resizable-panels](https://www.npmjs.com/package/react-resizable-panels): ^4.6.0
