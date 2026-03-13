@@ -325,7 +325,7 @@ Useful resources and dependencies that are used in Vibe.
 - [prisma](https://www.npmjs.com/package/prisma): ^7.3.0
 - [prismjs](https://www.npmjs.com/package/prismjs): ^1.30.0
 - [random-word-slugs](https://www.npmjs.com/package/random-word-slugs): ^0.1.7
-- [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^9.0.1
+- [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^9.1.1
 - [react](https://www.npmjs.com/package/react): 19.2.4
 - [react-dom](https://www.npmjs.com/package/react-dom): 19.2.4
 - [react-error-boundary](https://www.npmjs.com/package/react-error-boundary): ^6.1.1
