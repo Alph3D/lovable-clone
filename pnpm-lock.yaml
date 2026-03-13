@@ -206,7 +206,7 @@ importers:
         version: 7.0.1(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-tailwindcss:
         specifier: 4.0.0-beta.0
-        version: 4.0.0-beta.0(tailwindcss@4.1.18)
+        version: 4.0.0-beta.0(tailwindcss@4.2.1)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -218,10 +218,10 @@ importers:
         version: 7.3.0(@types/react@19.2.13)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       tailwind-scrollbar:
         specifier: ^4.0.2
-        version: 4.0.2(react@19.2.4)(tailwindcss@4.1.18)
+        version: 4.0.2(react@19.2.4)(tailwindcss@4.2.1)
       tailwindcss:
-        specifier: ^4.1.18
-        version: 4.1.18
+        specifier: ^4.2.1
+        version: 4.2.1
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -4657,6 +4657,9 @@ packages:
   tailwindcss@4.1.18:
     resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
 
+  tailwindcss@4.2.1:
+    resolution: {integrity: sha512-/tBrSQ36vCleJkAOsy9kbNTgaxvGbyOamC30PRePTQe/o1MFwEKHQk4Cn7BNGaPtjp+PuUrByJehM1hgxfq4sw==}
+
   tapable@2.3.0:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
@@ -8023,13 +8026,13 @@ snapshots:
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-tailwindcss@4.0.0-beta.0(tailwindcss@4.1.18):
+  eslint-plugin-tailwindcss@4.0.0-beta.0(tailwindcss@4.2.1):
     dependencies:
       fast-glob: 3.3.3
       postcss: 8.5.6
       synckit: 0.11.12
-      tailwind-api-utils: 1.0.3(tailwindcss@4.1.18)
-      tailwindcss: 4.1.18
+      tailwind-api-utils: 1.0.3(tailwindcss@4.2.1)
+      tailwindcss: 4.2.1
 
   eslint-scope@5.1.1:
     dependencies:
@@ -9780,23 +9783,25 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.2.9
 
-  tailwind-api-utils@1.0.3(tailwindcss@4.1.18):
+  tailwind-api-utils@1.0.3(tailwindcss@4.2.1):
     dependencies:
       enhanced-resolve: 5.18.4
       jiti: 2.6.1
       local-pkg: 1.1.2
-      tailwindcss: 4.1.18
+      tailwindcss: 4.2.1
 
   tailwind-merge@3.4.0: {}
 
-  tailwind-scrollbar@4.0.2(react@19.2.4)(tailwindcss@4.1.18):
+  tailwind-scrollbar@4.0.2(react@19.2.4)(tailwindcss@4.2.1):
     dependencies:
       prism-react-renderer: 2.4.1(react@19.2.4)
-      tailwindcss: 4.1.18
+      tailwindcss: 4.2.1
     transitivePeerDependencies:
       - react
 
   tailwindcss@4.1.18: {}
+
+  tailwindcss@4.2.1: {}
 
   tapable@2.3.0: {}
 
