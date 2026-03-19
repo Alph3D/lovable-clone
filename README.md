@@ -316,7 +316,7 @@ Useful resources and dependencies that are used in Vibe.
 - [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss): 4.0.0-beta.0
 - [inngest](https://www.npmjs.com/package/inngest): ^3.52.6
 - [lucide-react](https://www.npmjs.com/package/lucide-react): ^0.577.0
-- [next](https://www.npmjs.com/package/next): 16.1.6
+- [next](https://www.npmjs.com/package/next): 16.1.7
 - [next-themes](https://www.npmjs.com/package/next-themes): ^0.4.6
 - [openai](https://www.npmjs.com/package/openai): ^6.25.0
 - [pg](https://www.npmjs.com/package/pg): ^8.20.0
