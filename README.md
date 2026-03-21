@@ -279,7 +279,7 @@ Useful resources and dependencies that are used in Vibe.
 - [@ianvs/prettier-plugin-sort-imports](https://www.npmjs.com/package/@ianvs/prettier-plugin-sort-imports): ^4.7.0
 - [@inngest/agent-kit](https://www.npmjs.com/package/@inngest/agent-kit): ^0.13.2
 - [@next/eslint-plugin-next](https://www.npmjs.com/package/@next/eslint-plugin-next): ^16.1.6
-- [@prisma/adapter-pg](https://www.npmjs.com/package/@prisma/adapter-pg): ^7.4.0
+- [@prisma/adapter-pg](https://www.npmjs.com/package/@prisma/adapter-pg): ^7.5.0
 - [@prisma/client](https://www.npmjs.com/package/@prisma/client): ^7.3.0
 - [@radix-ui/react-collapsible](https://www.npmjs.com/package/@radix-ui/react-collapsible): ^1.1.12
 - [@radix-ui/react-dialog](https://www.npmjs.com/package/@radix-ui/react-dialog): ^1.1.15
@@ -316,6 +316,7 @@ Useful resources and dependencies that are used in Vibe.
 - [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss): 4.0.0-beta.0
 - [inngest](https://www.npmjs.com/package/inngest): ^3.52.6
 - [lucide-react](https://www.npmjs.com/package/lucide-react): ^0.577.0
+- [mprocs](https://www.npmjs.com/package/mprocs): ^0.9.1
 - [next](https://www.npmjs.com/package/next): 16.1.7
 - [next-themes](https://www.npmjs.com/package/next-themes): ^0.4.6
 - [openai](https://www.npmjs.com/package/openai): ^6.32.0
