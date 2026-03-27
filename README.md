@@ -323,7 +323,7 @@ Useful resources and dependencies that are used in Vibe.
 - [pg](https://www.npmjs.com/package/pg): ^8.20.0
 - [prettier](https://www.npmjs.com/package/prettier): ^3.8.1
 - [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss): ^0.7.2
-- [prisma](https://www.npmjs.com/package/prisma): ^7.3.0
+- [prisma](https://www.npmjs.com/package/prisma): ^7.5.0
 - [prismjs](https://www.npmjs.com/package/prismjs): ^1.30.0
 - [random-word-slugs](https://www.npmjs.com/package/random-word-slugs): ^0.1.7
 - [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^9.1.1
