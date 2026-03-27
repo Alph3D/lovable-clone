@@ -296,7 +296,7 @@ Useful resources and dependencies that are used in Vibe.
 - [@trpc/server](https://www.npmjs.com/package/@trpc/server): ^11.9.0
 - [@trpc/tanstack-react-query](https://www.npmjs.com/package/@trpc/tanstack-react-query): ^11.9.0
 - [@types/node](https://www.npmjs.com/package/@types/node): ^25.2.3
-- [@types/pg](https://www.npmjs.com/package/@types/pg): ^8.18.0
+- [@types/pg](https://www.npmjs.com/package/@types/pg): ^8.20.0
 - [@types/prismjs](https://www.npmjs.com/package/@types/prismjs): ^1.26.6
 - [@types/react](https://www.npmjs.com/package/@types/react): ^19.2.13
 - [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): ^19.2.3
