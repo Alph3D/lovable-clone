@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { ClerkLoaded, ClerkLoading, SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { ClerkLoaded, ClerkLoading, Show, SignInButton, SignUpButton } from '@clerk/nextjs';
 
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
@@ -39,7 +39,7 @@ export const Navbar = () => {
 
 				<ClerkLoaded>
 					<div className='flex items-center gap-2'>
-						<SignedOut>
+						<Show when='signed-out'>
 							<div className='flex gap-2'>
 								<div className='hidden sm:inline-block'>
 									<SignUpButton>
@@ -53,11 +53,11 @@ export const Navbar = () => {
 									<Button size='sm'>Sign in</Button>
 								</SignInButton>
 							</div>
-						</SignedOut>
+						</Show>
 
-						<SignedIn>
+						<Show when='signed-in'>
 							<UserControl showName={!isMobile} />
-						</SignedIn>
+						</Show>
 
 						<ThemeToggle />
 
