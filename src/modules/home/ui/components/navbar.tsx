@@ -30,15 +30,13 @@ export const Navbar = () => {
 					<span className='text-lg font-semibold'>Vibe</span>
 				</Link>
 
-				<ClerkLoading>
-					<div className='flex items-center gap-2'>
+				<div className='flex items-center gap-2'>
+					<ClerkLoading>
 						<Skeleton className='h-8 w-16' />
 						<Skeleton className='h-8 w-16' />
-					</div>
-				</ClerkLoading>
+					</ClerkLoading>
 
-				<ClerkLoaded>
-					<div className='flex items-center gap-2'>
+					<ClerkLoaded>
 						<Show when='signed-out'>
 							<div className='flex gap-2'>
 								<div className='hidden sm:inline-block'>
@@ -58,20 +56,20 @@ export const Navbar = () => {
 						<Show when='signed-in'>
 							<UserControl showName={!isMobile} />
 						</Show>
+					</ClerkLoaded>
 
-						<ThemeToggle />
+					<ThemeToggle />
 
-						<Link
-							href={LINKS.SOURCE_CODE}
-							target='_blank'
-							rel='noopener noreferrer'
-							className='hover:opacity-75 dark:invert'
-						>
-							<img src='/github.svg' alt='GitHub' height={32} width={32} />
-							<span className='sr-only'>Source Code</span>
-						</Link>
-					</div>
-				</ClerkLoaded>
+					<Link
+						href={LINKS.SOURCE_CODE}
+						target='_blank'
+						rel='noopener noreferrer'
+						className='hover:opacity-75 dark:invert'
+					>
+						<img src='/github.svg' alt='GitHub' height={32} width={32} />
+						<span className='sr-only'>Source Code</span>
+					</Link>
+				</div>
 			</div>
 		</nav>
 	);
