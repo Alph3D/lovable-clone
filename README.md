@@ -272,7 +272,7 @@ Useful resources and dependencies that are used in Vibe.
 <!--- DEPENDENCIES_START --->
 - [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser): ^7.28.6
 - [@clerk/nextjs](https://www.npmjs.com/package/@clerk/nextjs): ^7.2.2
-- [@clerk/themes](https://www.npmjs.com/package/@clerk/themes): ^2.4.51
+- [@clerk/themes](https://www.npmjs.com/package/@clerk/themes): ^2.4.57
 - [@e2b/code-interpreter](https://www.npmjs.com/package/@e2b/code-interpreter): ^2.3.3
 - [@eslint/eslintrc](https://www.npmjs.com/package/@eslint/eslintrc): ^3.3.4
 - [@hookform/resolvers](https://www.npmjs.com/package/@hookform/resolvers): ^5.2.2
