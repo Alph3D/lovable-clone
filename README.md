@@ -271,7 +271,7 @@ Useful resources and dependencies that are used in Vibe.
 - Thanks to CodeWithAntonio: https://codewithantonio.com/
 <!--- DEPENDENCIES_START --->
 - [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser): ^7.28.6
-- [@clerk/nextjs](https://www.npmjs.com/package/@clerk/nextjs): ^7.0.7
+- [@clerk/nextjs](https://www.npmjs.com/package/@clerk/nextjs): ^7.2.2
 - [@clerk/themes](https://www.npmjs.com/package/@clerk/themes): ^2.4.51
 - [@e2b/code-interpreter](https://www.npmjs.com/package/@e2b/code-interpreter): ^2.3.3
 - [@eslint/eslintrc](https://www.npmjs.com/package/@eslint/eslintrc): ^3.3.4
@@ -326,7 +326,7 @@ Useful resources and dependencies that are used in Vibe.
 - [prisma](https://www.npmjs.com/package/prisma): ^7.5.0
 - [prismjs](https://www.npmjs.com/package/prismjs): ^1.30.0
 - [random-word-slugs](https://www.npmjs.com/package/random-word-slugs): ^0.1.7
-- [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^9.1.1
+- [rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible): ^11.0.0
 - [react](https://www.npmjs.com/package/react): 19.2.4
 - [react-dom](https://www.npmjs.com/package/react-dom): 19.2.4
 - [react-error-boundary](https://www.npmjs.com/package/react-error-boundary): ^6.1.1
