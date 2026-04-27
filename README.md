@@ -238,9 +238,21 @@ NEXT_PUBLIC_APP_BASE_URL="http://localhost:3000"
 
 ---
 
-11. Install Project Dependencies using `pnpm install --legacy-peer-deps` or `npm install --legacy-peer-deps`.
+### 11. Ngrok
+  
+- Download Ngrok: https://ngrok.com/download
+- Sign up at [Ngrok](https://ngrok.com/) and copy your auth token from the dashboard.
+- Authenticate ngrok locally:
 
-12. Now app is fully configured 👍 and you can start using this app using either one of `pnpm run dev` or `npm run dev`.
+```bash
+ngrok config add-authtoken YOUR_AUTH_TOKEN
+```
+
+---
+
+12. Install Project Dependencies using `pnpm install --legacy-peer-deps` or `npm install --legacy-peer-deps`.
+
+13. Now app is fully configured 👍 and you can start using this app using either one of `pnpm run dev` or `npm run dev`.
 
 **NOTE:** Please make sure to keep your API keys and configuration values secure and do not expose them publicly.
 
