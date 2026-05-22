@@ -303,7 +303,7 @@ Useful resources and dependencies that are used in Vibe.
 - [@radix-ui/react-tooltip](https://www.npmjs.com/package/@radix-ui/react-tooltip): ^1.2.8
 - [@t3-oss/env-nextjs](https://www.npmjs.com/package/@t3-oss/env-nextjs): ^0.13.11
 - [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss): ^4.1.18
-- [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query): ^5.90.20
+- [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query): ^5.100.11
 - [@trpc/client](https://www.npmjs.com/package/@trpc/client): ^11.9.0
 - [@trpc/server](https://www.npmjs.com/package/@trpc/server): ^11.9.0
 - [@trpc/tanstack-react-query](https://www.npmjs.com/package/@trpc/tanstack-react-query): ^11.9.0
