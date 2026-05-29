@@ -327,7 +327,7 @@ Useful resources and dependencies that are used in Vibe.
 - [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): ^7.1.1
 - [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss): 4.0.0-beta.0
 - [inngest](https://www.npmjs.com/package/inngest): ^4.4.0
-- [lucide-react](https://www.npmjs.com/package/lucide-react): ^1.16.0
+- [lucide-react](https://www.npmjs.com/package/lucide-react): ^1.17.0
 - [mprocs](https://www.npmjs.com/package/mprocs): ^0.9.2
 - [next](https://www.npmjs.com/package/next): 16.2.6
 - [next-themes](https://www.npmjs.com/package/next-themes): ^0.4.6
