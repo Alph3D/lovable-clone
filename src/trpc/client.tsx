@@ -8,7 +8,6 @@ import { createTRPCContext } from '@trpc/tanstack-react-query';
 import superjson from 'superjson';
 
 import type { AppRouter } from '@/trpc/routers/_app';
-
 import { makeQueryClient } from './query-client';
 
 export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
@@ -39,10 +38,15 @@ export const TRPCReactProvider = ({
 			links: [
 				httpBatchLink({
 					transformer: superjson,
-					url:
-						typeof window !== 'undefined'
-							? `${window.location.origin}/api/trpc`
-							: '/api/trpc',
+					url: '/api/trpc', // ✅ simplifié (meilleure stabilité)
+
+					// 🔥 FIX IMPORTANT POUR CLERK AUTH
+					fetch(url, options) {
+						return fetch(url, {
+							...options,
+							credentials: 'include', // 👈 FIX "Not authenticated"
+						});
+					},
 				}),
 			],
 		})
