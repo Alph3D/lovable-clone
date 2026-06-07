@@ -27,7 +27,7 @@ export const Navbar = () => {
 			<div className='mx-auto flex w-full max-w-5xl items-center justify-between'>
 				<Link href='/' className='flex items-center gap-2'>
 					<img src='/logo.svg' alt='Vibe logo' width={24} height={24} />
-					<span className='text-lg font-semibold'>Vibe</span>
+					<span className='text-lg font-semibold'>Code AI</span>
 				</Link>
 
 				<div className='flex items-center gap-2'>
